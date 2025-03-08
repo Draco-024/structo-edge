@@ -289,8 +289,7 @@ const Index = () => {
                 duration={course.duration}
                 level={course.level}
                 rating={course.rating}
-                className="animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="transform transition-all hover:translate-y-[-8px]"
               />
             ))}
           </div>
