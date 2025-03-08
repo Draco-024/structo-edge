@@ -1,79 +1,75 @@
 
 import MainLayout from '@/layouts/MainLayout';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
+import { MapPin, Calendar, Briefcase, Users, Heart, BookOpen, Globe, BarChart3 } from 'lucide-react';
 
 const Careers = () => {
   const openPositions = [
     {
       title: "Senior Structural Engineer",
-      department: "Course Development",
-      location: "Remote",
-      type: "Full-time"
+      department: "Content Development",
+      location: "San Francisco, CA (Remote Option)",
+      type: "Full-time",
+      posted: "2 weeks ago",
+      description: "Join our team of experts to develop cutting-edge structural engineering courses and content. You'll help create comprehensive learning materials that bridge theory and practice."
     },
     {
       title: "Curriculum Designer",
       department: "Education",
-      location: "New York, NY",
-      type: "Full-time"
+      location: "Boston, MA (Remote Option)",
+      type: "Full-time",
+      posted: "3 weeks ago",
+      description: "Design and structure learning paths for structural engineering professionals. You'll work with subject matter experts to create effective educational experiences."
     },
     {
-      title: "Frontend Developer",
-      department: "Engineering",
+      title: "Technical Content Writer",
+      department: "Content Development",
       location: "Remote",
-      type: "Full-time"
+      type: "Contract",
+      posted: "1 week ago",
+      description: "Create clear, concise, and accurate technical documentation and course materials for structural engineering concepts and applications."
     },
     {
-      title: "Content Marketing Manager",
-      department: "Marketing",
-      location: "San Francisco, CA",
-      type: "Full-time"
+      title: "Video Production Specialist",
+      department: "Media",
+      location: "Los Angeles, CA",
+      type: "Full-time",
+      posted: "4 weeks ago",
+      description: "Help produce high-quality educational videos that clearly demonstrate structural engineering principles and practices."
     },
     {
-      title: "Customer Success Specialist",
-      department: "Support",
+      title: "Community Manager",
+      department: "Operations",
       location: "Remote",
-      type: "Full-time"
+      type: "Part-time",
+      posted: "2 days ago",
+      description: "Foster and grow our community of structural engineering learners. Moderate discussions, organize events, and create engagement opportunities."
     }
   ];
 
-  const benefits = [
+  const valueProps = [
     {
-      title: "Flexible Work Environment",
-      description: "Work remotely or from one of our office locations with flexible hours.",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-      )
+      title: "Learning & Growth",
+      description: "Continuous professional development with education stipends and mentorship opportunities.",
+      icon: BookOpen
     },
     {
-      title: "Professional Development",
-      description: "Access to all our courses and budget for conferences and further education.",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path d="M12 14l9-5-9-5-9 5 9 5z" />
-          <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-        </svg>
-      )
+      title: "Work-Life Balance",
+      description: "Flexible working hours, generous PTO, and remote work options for most positions.",
+      icon: Heart
     },
     {
-      title: "Comprehensive Health Benefits",
-      description: "Medical, dental, and vision coverage for you and your dependents.",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
-      )
+      title: "Collaborative Culture",
+      description: "Work alongside passionate professionals in a supportive and inclusive environment.",
+      icon: Users
     },
     {
-      title: "Competitive Compensation",
-      description: "Salary packages that recognize your expertise and contributions.",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
+      title: "Global Impact",
+      description: "Help engineers worldwide develop skills that create safer, more sustainable built environments.",
+      icon: Globe
     }
   ];
 
@@ -85,80 +81,134 @@ const Careers = () => {
             Join Our Team
           </h1>
           <p className="text-muted-foreground">
-            Help us revolutionize structural engineering education and empower the next generation of engineers.
+            Help us shape the future of structural engineering education and make an impact on the built environment.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20">
-          <div>
-            <h2 className="text-2xl font-medium mb-4">Our Mission</h2>
-            <p className="text-muted-foreground mb-6">
-              At StructoEdge, we're building the future of technical education. Our platform combines cutting-edge technology with expert instruction to create learning experiences that are accessible, engaging, and effective.
-            </p>
-            <p className="text-muted-foreground mb-6">
-              We're passionate about empowering structural engineers with the knowledge and skills they need to design safer, more innovative, and more sustainable structures.
-            </p>
-            <p className="text-muted-foreground">
-              If you're excited about making a difference in the field of engineering education, we'd love to hear from you.
-            </p>
-          </div>
-          <div>
+        {/* Hero Section */}
+        <div className="relative rounded-lg overflow-hidden mb-16">
+          <div className="absolute inset-0">
             <img 
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-              alt="Team collaboration" 
-              className="rounded-lg shadow-md w-full h-auto"
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" 
+              alt="Team collaboration"
+              className="w-full h-full object-cover"
             />
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+          <div className="relative max-w-3xl mx-auto px-6 py-24 text-center text-white">
+            <h2 className="text-2xl md:text-3xl font-medium mb-4">Make an Impact</h2>
+            <p className="mb-8 text-white/80">
+              At StructoEdge, we're on a mission to transform structural engineering education. Join us in creating world-class learning experiences that help engineers build safer, more sustainable structures.
+            </p>
+            <Button size="lg" className="bg-primary hover:bg-primary/90">
+              See Open Positions
+            </Button>
           </div>
         </div>
 
-        <h2 className="text-2xl font-medium mb-8 text-center">Benefits & Perks</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-          {benefits.map((benefit, index) => (
-            <div key={index} className="text-center">
-              <div className="mx-auto mb-4 w-16 h-16 flex items-center justify-center rounded-full bg-muted/30">
-                {benefit.icon}
+        {/* Values Section */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-medium text-center mb-8">Why Work With Us</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {valueProps.map((prop, index) => (
+              <div key={index} className="border border-border rounded-lg p-6 hover:shadow-md transition-shadow">
+                <prop.icon className="h-8 w-8 text-primary mb-4" />
+                <h3 className="text-lg font-medium mb-2">{prop.title}</h3>
+                <p className="text-muted-foreground">{prop.description}</p>
               </div>
-              <h3 className="text-lg font-medium mb-2">{benefit.title}</h3>
-              <p className="text-sm text-muted-foreground">{benefit.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        <h2 className="text-2xl font-medium mb-8 text-center">Open Positions</h2>
-        <div className="max-w-4xl mx-auto">
-          <div className="border border-border rounded-lg overflow-hidden">
-            <div className="grid grid-cols-4 bg-muted/30 p-4 text-sm font-medium text-muted-foreground">
-              <div className="col-span-2">Position</div>
-              <div>Department</div>
-              <div>Location</div>
-            </div>
-            <div className="divide-y divide-border">
+        {/* Open Positions */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-medium text-center mb-8">Open Positions</h2>
+          
+          <Tabs defaultValue="all" className="w-full mb-8">
+            <TabsList className="flex justify-center space-x-2 mb-6">
+              <TabsTrigger value="all">All Departments</TabsTrigger>
+              <TabsTrigger value="content">Content Development</TabsTrigger>
+              <TabsTrigger value="education">Education</TabsTrigger>
+              <TabsTrigger value="operations">Operations</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="all" className="space-y-4">
               {openPositions.map((position, index) => (
-                <div key={index} className="grid grid-cols-4 p-4 hover:bg-muted/10 transition-colors">
-                  <div className="col-span-2">
-                    <h3 className="font-medium text-primary">{position.title}</h3>
-                    <span className="text-xs bg-muted rounded-full px-2 py-0.5 mt-1 inline-block">{position.type}</span>
-                  </div>
-                  <div className="text-muted-foreground">{position.department}</div>
-                  <div className="text-muted-foreground">{position.location}</div>
-                </div>
+                <PositionCard key={index} position={position} />
               ))}
-            </div>
-          </div>
-          <div className="text-center mt-8">
-            <Button>View All Positions</Button>
-          </div>
+            </TabsContent>
+            
+            {["content", "education", "operations"].map((dept) => (
+              <TabsContent key={dept} value={dept} className="space-y-4">
+                {openPositions
+                  .filter(p => 
+                    (dept === "content" && p.department === "Content Development") ||
+                    (dept === "education" && p.department === "Education") ||
+                    (dept === "operations" && p.department === "Operations") ||
+                    (dept === "media" && p.department === "Media")
+                  )
+                  .map((position, index) => (
+                    <PositionCard key={index} position={position} />
+                  ))}
+              </TabsContent>
+            ))}
+          </Tabs>
         </div>
 
-        <div className="mt-20 max-w-4xl mx-auto bg-muted/30 rounded-lg border border-border p-8 text-center">
-          <h2 className="text-2xl font-medium mb-4">Don't see a position that fits?</h2>
-          <p className="text-muted-foreground mb-6">
-            We're always looking for talented individuals to join our team. Send us your resume and let us know how you can contribute.
+        {/* CTA Section */}
+        <div className="bg-muted/30 rounded-lg p-8 md:p-12 text-center">
+          <h2 className="text-2xl font-medium mb-4">Don't See a Position That Fits?</h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+            We're always looking for talented individuals to join our team. Send us your resume and tell us how you can contribute.
           </p>
-          <Button variant="outline">Send General Application</Button>
+          <Button size="lg">Submit Your Resume</Button>
         </div>
       </div>
     </MainLayout>
+  );
+};
+
+interface PositionCardProps {
+  position: {
+    title: string;
+    department: string;
+    location: string;
+    type: string;
+    posted: string;
+    description: string;
+  };
+}
+
+const PositionCard = ({ position }: PositionCardProps) => {
+  return (
+    <Card className="hover:shadow-md transition-shadow">
+      <CardHeader className="pb-3">
+        <div className="flex justify-between items-start">
+          <div>
+            <CardTitle className="text-xl">{position.title}</CardTitle>
+            <CardDescription className="mt-1">{position.department}</CardDescription>
+          </div>
+          <Button>Apply Now</Button>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <p className="mb-4">{position.description}</p>
+        <div className="flex flex-wrap gap-y-2 text-sm text-muted-foreground">
+          <div className="flex items-center mr-6">
+            <MapPin className="h-4 w-4 mr-1" />
+            <span>{position.location}</span>
+          </div>
+          <div className="flex items-center mr-6">
+            <Briefcase className="h-4 w-4 mr-1" />
+            <span>{position.type}</span>
+          </div>
+          <div className="flex items-center">
+            <Calendar className="h-4 w-4 mr-1" />
+            <span>Posted {position.posted}</span>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

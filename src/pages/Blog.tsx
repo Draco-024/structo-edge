@@ -1,72 +1,75 @@
 
 import MainLayout from '@/layouts/MainLayout';
 import { Link } from 'react-router-dom';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Building, Clock, User, CalendarDays } from "lucide-react";
 
 const Blog = () => {
   const blogPosts = [
     {
-      id: '1',
-      title: 'Innovations in Bridge Design: The Future of Infrastructure',
-      excerpt: 'Exploring cutting-edge technologies and methodologies that are revolutionizing bridge design and construction.',
-      date: 'May 15, 2023',
-      author: 'Dr. Sarah Chen',
-      category: 'Infrastructure',
-      image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      readTime: '7 min read'
+      id: '001',
+      title: 'Advances in Concrete Mix Design for Sustainable Structures',
+      excerpt: 'Explore the latest innovations in concrete mix design that reduce environmental impact while maintaining structural integrity.',
+      author: 'Dr. Robert Chen',
+      category: 'Materials',
+      date: 'October 15, 2023',
+      readTime: '8 min read',
+      image: 'https://images.unsplash.com/photo-1518228684985-87685f9c6916?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     },
     {
-      id: '2',
-      title: 'Sustainable Materials in Structural Engineering',
-      excerpt: 'How new eco-friendly building materials are changing the landscape of structural engineering practices.',
-      date: 'April 22, 2023',
-      author: 'Prof. James Wilson',
-      category: 'Sustainability',
-      image: 'https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      readTime: '5 min read'
+      id: '002',
+      title: 'Structural Analysis Techniques for High-Rise Buildings',
+      excerpt: 'A comprehensive overview of modern structural analysis methods used in designing resilient skyscrapers.',
+      author: 'Emily Wong, PE',
+      category: 'Analysis',
+      date: 'September 28, 2023',
+      readTime: '12 min read',
+      image: 'https://images.unsplash.com/photo-1534193708707-6c5e7d3a0b81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     },
     {
-      id: '3',
-      title: 'Seismic Design: Lessons from Recent Earthquakes',
-      excerpt: 'Analyzing structural behaviors during recent major earthquakes and key takeaways for improved seismic design.',
-      date: 'March 10, 2023',
-      author: 'Dr. Robert Lee',
-      category: 'Seismic Engineering',
-      image: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      readTime: '9 min read'
+      id: '003',
+      title: 'Seismic Retrofitting: Lessons from Recent Earthquakes',
+      excerpt: 'What recent seismic events have taught us about the effectiveness of various retrofitting strategies.',
+      author: 'Dr. Michael Barnes',
+      category: 'Seismic',
+      date: 'August 10, 2023',
+      readTime: '10 min read',
+      image: 'https://images.unsplash.com/photo-1559314809-406a5a5fb9fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     },
     {
-      id: '4',
-      title: 'Building Information Modeling (BIM) for Structural Engineers',
-      excerpt: 'How BIM is transforming workflow, collaboration, and project outcomes in structural engineering projects.',
-      date: 'February 28, 2023',
-      author: 'Emily Parker',
+      id: '004',
+      title: 'Bridge Engineering: Innovations in Long-Span Designs',
+      excerpt: 'Recent advancements in materials and analysis techniques that are pushing the boundaries of long-span bridge design.',
+      author: 'Jessica Taylor, PhD',
+      category: 'Bridges',
+      date: 'July 22, 2023',
+      readTime: '9 min read',
+      image: 'https://images.unsplash.com/photo-1605464315542-bda3e2f4e605?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+    },
+    {
+      id: '005',
+      title: 'Digital Twins in Structural Engineering Practice',
+      excerpt: 'How digital twin technology is transforming monitoring, maintenance, and lifecycle management of critical infrastructure.',
+      author: 'Robert Lee, PE',
       category: 'Technology',
-      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      readTime: '6 min read'
+      date: 'June 15, 2023',
+      readTime: '7 min read',
+      image: 'https://images.unsplash.com/photo-1560732488-7b5f5b8c8f99?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     },
     {
-      id: '5',
-      title: 'The Role of AI in Structural Analysis and Design',
-      excerpt: 'Examining how artificial intelligence and machine learning are being applied to solve complex structural engineering problems.',
-      date: 'January 15, 2023',
-      author: 'Dr. Michael Zhang',
-      category: 'Technology',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      readTime: '8 min read'
-    },
-    {
-      id: '6',
-      title: 'Career Paths in Structural Engineering: Beyond Traditional Roles',
-      excerpt: 'Exploring emerging career opportunities for structural engineers in tech, sustainability, and interdisciplinary fields.',
-      date: 'December 5, 2022',
-      author: 'Jessica Williams',
-      category: 'Career',
-      image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-      readTime: '4 min read'
+      id: '006',
+      title: 'Climate Adaptation in Structural Design Codes',
+      excerpt: 'An analysis of how design codes are evolving to address climate change impacts on structural performance and safety.',
+      author: 'Prof. Sophia Kim',
+      category: 'Codes & Standards',
+      date: 'May 30, 2023',
+      readTime: '11 min read',
+      image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     }
   ];
 
-  const categories = ['All', 'Infrastructure', 'Sustainability', 'Seismic Engineering', 'Technology', 'Career'];
+  const categories = ['All', 'Materials', 'Analysis', 'Seismic', 'Bridges', 'Technology', 'Codes & Standards'];
 
   return (
     <MainLayout>
@@ -76,66 +79,109 @@ const Blog = () => {
             Structural Engineering Blog
           </h1>
           <p className="text-muted-foreground">
-            Insights, innovations, and best practices from leading structural engineering experts.
+            Stay updated with the latest trends, research findings, and best practices in structural engineering.
           </p>
         </div>
 
-        <div className="mb-8 flex items-center justify-center space-x-2 overflow-x-auto pb-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                category === 'All' 
-                  ? 'bg-primary text-white' 
-                  : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-primary'
-              }`}
-            >
-              {category}
-            </button>
+        <Tabs defaultValue="All" className="w-full mb-8">
+          <TabsList className="flex flex-wrap justify-center space-x-2 mb-6">
+            {categories.map((category) => (
+              <TabsTrigger key={category} value={category}>
+                {category}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          
+          <TabsContent value="All" className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {blogPosts.map((post) => (
+                <BlogCard key={post.id} post={post} />
+              ))}
+            </div>
+          </TabsContent>
+          
+          {categories.slice(1).map((category) => (
+            <TabsContent key={category} value={category} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {blogPosts
+                  .filter((post) => post.category === category)
+                  .map((post) => (
+                    <BlogCard key={post.id} post={post} />
+                  ))}
+              </div>
+            </TabsContent>
           ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
-            <Link key={post.id} to={`/blog/${post.id}`} className="group">
-              <article className="overflow-hidden rounded-lg border border-border transition-all duration-200 hover:shadow-md">
-                <div className="aspect-video w-full overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
-                      {post.category}
-                    </span>
-                    <span className="text-xs text-muted-foreground">{post.readTime}</span>
-                  </div>
-                  <h3 className="text-xl font-medium mb-2 group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">By {post.author}</span>
-                    <span className="text-xs text-muted-foreground">{post.date}</span>
-                  </div>
-                </div>
-              </article>
-            </Link>
-          ))}
-        </div>
+        </Tabs>
 
         <div className="mt-12 flex justify-center">
-          <button className="bg-muted hover:bg-muted/80 px-6 py-2 rounded-md text-sm font-medium text-foreground transition-colors">
+          <Link 
+            to="#" 
+            className="px-6 py-3 rounded-md bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
+          >
             Load More Articles
-          </button>
+          </Link>
         </div>
       </div>
     </MainLayout>
+  );
+};
+
+interface BlogCardProps {
+  post: {
+    id: string;
+    title: string;
+    excerpt: string;
+    author: string;
+    category: string;
+    date: string;
+    readTime: string;
+    image: string;
+  };
+}
+
+const BlogCard = ({ post }: BlogCardProps) => {
+  return (
+    <Card className="overflow-hidden hover:shadow-md transition-shadow">
+      <div className="aspect-video w-full overflow-hidden">
+        <img 
+          src={post.image} 
+          alt={post.title} 
+          className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
+        />
+      </div>
+      <CardHeader className="pb-2">
+        <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-2">
+          <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+            {post.category}
+          </span>
+          <span>•</span>
+          <span className="inline-flex items-center">
+            <Clock className="h-3.5 w-3.5 mr-1" />
+            {post.readTime}
+          </span>
+        </div>
+        <CardTitle className="text-lg line-clamp-2 hover:text-primary transition-colors">
+          <Link to={`/blog/${post.id}`}>
+            {post.title}
+          </Link>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <CardDescription className="line-clamp-3 mb-4">
+          {post.excerpt}
+        </CardDescription>
+      </CardContent>
+      <CardFooter className="text-sm text-muted-foreground border-t border-border pt-4 flex justify-between">
+        <div className="flex items-center">
+          <User className="h-4 w-4 mr-1" />
+          {post.author}
+        </div>
+        <div className="flex items-center">
+          <CalendarDays className="h-4 w-4 mr-1" />
+          {post.date}
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 

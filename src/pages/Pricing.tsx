@@ -1,55 +1,57 @@
 
 import MainLayout from '@/layouts/MainLayout';
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
 
 const Pricing = () => {
   const pricingPlans = [
     {
-      name: 'Basic',
-      description: 'Essential structural engineering education for beginners',
-      price: '$19',
-      period: 'per month',
+      name: "Basic",
+      description: "Essential structural engineering courses to get you started",
+      price: "$149",
+      duration: "per course",
       features: [
-        'Access to 10 foundational courses',
-        'Basic practice problems',
-        'Mobile access',
-        'Certificate of completion',
+        "Access to individual course materials",
+        "14-day money-back guarantee",
+        "Course completion certificate",
+        "6 months of access",
+        "Email support"
       ],
-      cta: 'Get Started',
-      popular: false
+      recommended: false,
+      btnText: "Purchase Course"
     },
     {
-      name: 'Professional',
-      description: 'Comprehensive training for working engineers',
-      price: '$49',
-      period: 'per month',
+      name: "Professional",
+      description: "Full access to our comprehensive curriculum",
+      price: "$49",
+      duration: "per month",
       features: [
-        'Access to all 50+ courses',
-        'Advanced practice problems',
-        'Downloadable resources',
-        'Priority support',
-        '1 specialized certification path',
-        'Mock exams and assessments'
+        "Access to all courses",
+        "Hands-on projects & assignments",
+        "Personalized feedback",
+        "Course completion certificates",
+        "Priority email support",
+        "Access to community forum"
       ],
-      cta: 'Start Pro Plan',
-      popular: true
+      recommended: true,
+      btnText: "Start Free Trial"
     },
     {
-      name: 'Enterprise',
-      description: 'Custom solutions for engineering firms and teams',
-      price: 'Custom',
-      period: 'per organization',
+      name: "Enterprise",
+      description: "Custom solutions for teams and organizations",
+      price: "Custom",
+      duration: "billed annually",
       features: [
-        'All Professional features',
-        'Dedicated account manager',
-        'Custom learning paths',
-        'Team analytics & reporting',
-        'API access',
-        'SSO integration'
+        "Everything in Professional plan",
+        "Customized learning paths",
+        "Dedicated account manager",
+        "Team analytics dashboard",
+        "SSO and LMS integration",
+        "Custom course development"
       ],
-      cta: 'Contact Sales',
-      popular: false
+      recommended: false,
+      btnText: "Contact Sales"
     }
   ];
 
@@ -60,73 +62,68 @@ const Pricing = () => {
           <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-primary mb-4">
             Simple, Transparent Pricing
           </h1>
-          <p className="text-muted-foreground">
-            Choose the plan that's right for your career growth and development needs.
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Choose the plan that fits your needs. All plans include unlimited access to our curriculum and course materials.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {pricingPlans.map((plan) => (
-            <div 
-              key={plan.name} 
-              className={`relative rounded-lg border ${plan.popular ? 'border-primary shadow-lg' : 'border-border'} p-6 flex flex-col`}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+          {pricingPlans.map((plan, index) => (
+            <Card 
+              key={index} 
+              className={`relative flex flex-col ${plan.recommended ? 'border-primary shadow-lg' : 'border-border'}`}
             >
-              {plan.popular && (
-                <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2">
-                  <span className="bg-primary text-white text-xs font-medium px-2 py-1 rounded-md">
+              {plan.recommended && (
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <span className="inline-flex items-center rounded-full bg-primary px-3 py-1 text-xs font-medium text-white">
                     Most Popular
                   </span>
                 </div>
               )}
-              <div className="mb-6">
-                <h3 className="text-xl font-medium mb-2">{plan.name}</h3>
-                <p className="text-sm text-muted-foreground h-12">{plan.description}</p>
-              </div>
-              
-              <div className="mb-6">
-                <div className="flex items-baseline">
-                  <span className="text-3xl font-bold">{plan.price}</span>
-                  <span className="text-muted-foreground ml-2">{plan.period}</span>
+              <CardHeader>
+                <CardTitle className="text-xl">{plan.name}</CardTitle>
+                <CardDescription>{plan.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-1">
+                <div className="mb-6">
+                  <span className="text-3xl font-bold text-primary">{plan.price}</span>
+                  <span className="text-muted-foreground"> {plan.duration}</span>
                 </div>
-              </div>
-              
-              <ul className="space-y-3 mb-8 flex-grow">
-                {plan.features.map((feature, index) => (
-                  <li key={index} className="flex items-start">
-                    <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              
-              <Button 
-                className={`w-full ${plan.popular ? '' : 'bg-muted-foreground/10 text-foreground hover:bg-muted-foreground/20'}`}
-                variant={plan.popular ? "default" : "outline"}
-              >
-                {plan.cta}
-              </Button>
-            </div>
+                <ul className="space-y-3">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start">
+                      <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
+                      <span className="text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+              <CardFooter>
+                <Button 
+                  className={`w-full ${plan.recommended ? 'bg-primary hover:bg-primary/90' : ''}`}
+                  variant={plan.recommended ? 'default' : 'outline'}
+                >
+                  {plan.btnText}
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </div>
-        
-        <div className="mt-16 max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl font-medium mb-6">Frequently Asked Questions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+
+        <div className="mt-16 max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl font-medium text-primary mb-4">Frequently Asked Questions</h2>
+          <div className="space-y-6 text-left">
             <div>
-              <h3 className="font-medium mb-2">Can I switch plans later?</h3>
-              <p className="text-muted-foreground text-sm">Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle.</p>
+              <h3 className="text-lg font-medium mb-2">Can I switch plans later?</h3>
+              <p className="text-muted-foreground">Yes, you can upgrade or downgrade your plan at any time. Changes will take effect in the next billing cycle.</p>
             </div>
             <div>
-              <h3 className="font-medium mb-2">Do you offer student discounts?</h3>
-              <p className="text-muted-foreground text-sm">Yes, we offer a 50% discount to verified students. Contact our support team for details.</p>
+              <h3 className="text-lg font-medium mb-2">Is there a free trial?</h3>
+              <p className="text-muted-foreground">We offer a 7-day free trial for our Professional plan. No credit card required.</p>
             </div>
             <div>
-              <h3 className="font-medium mb-2">What payment methods do you accept?</h3>
-              <p className="text-muted-foreground text-sm">We accept all major credit cards, PayPal, and bank transfers for enterprise plans.</p>
-            </div>
-            <div>
-              <h3 className="font-medium mb-2">How do certifications work?</h3>
-              <p className="text-muted-foreground text-sm">Complete a learning path to earn a certification. All certifications are industry-recognized and can be shared on your LinkedIn profile.</p>
+              <h3 className="text-lg font-medium mb-2">What's your refund policy?</h3>
+              <p className="text-muted-foreground">We offer a 14-day money-back guarantee for all our courses. If you're not satisfied, contact us for a full refund.</p>
             </div>
           </div>
         </div>

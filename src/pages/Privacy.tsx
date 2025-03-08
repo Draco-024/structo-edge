@@ -1,113 +1,159 @@
 
 import MainLayout from '@/layouts/MainLayout';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Link } from 'react-router-dom';
 
 const Privacy = () => {
+  const lastUpdated = "October 15, 2023";
+
+  const privacySections = [
+    {
+      title: "Information We Collect",
+      content: (
+        <>
+          <p className="mb-4">We collect several types of information from and about users of our Platform, including:</p>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>Personal information you provide when registering or maintaining an account, such as your name, email address, postal address, telephone number, and payment information.</li>
+            <li>Information about your courses, progress, and activity on the platform, including completed lectures, quiz attempts, and assignment submissions.</li>
+            <li>Technical information, including your IP address, browser type, operating system, device information, and usage details.</li>
+            <li>Information about your learning preferences, interests, and feedback you provide through surveys, reviews, or other communications.</li>
+          </ul>
+        </>
+      )
+    },
+    {
+      title: "How We Use Your Information",
+      content: (
+        <>
+          <p className="mb-4">We use information that we collect about you or that you provide to us:</p>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>To provide, maintain, and improve our Platform and services.</li>
+            <li>To personalize your experience and deliver content relevant to your interests and learning goals.</li>
+            <li>To process payments and fulfill orders for courses, subscriptions, or other products.</li>
+            <li>To communicate with you about your account, courses, or provide customer support.</li>
+            <li>To send promotional materials, newsletters, and other marketing communications.</li>
+            <li>To analyze usage patterns, monitor the effectiveness of our services, and enhance platform security.</li>
+          </ul>
+        </>
+      )
+    },
+    {
+      title: "Information Sharing",
+      content: (
+        <>
+          <p className="mb-4">We may share your personal information in the following circumstances:</p>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>With service providers who perform services on our behalf, such as payment processing, data analysis, and customer service.</li>
+            <li>With instructors, but only limited information necessary for course delivery and communication about course content.</li>
+            <li>To comply with legal obligations, enforce our terms, protect our rights, or respond to government requests.</li>
+            <li>In connection with a merger, acquisition, or sale of assets, with appropriate confidentiality agreements in place.</li>
+          </ul>
+          <p>We do not sell or rent your personal information to third parties for their marketing purposes without your explicit consent.</p>
+        </>
+      )
+    },
+    {
+      title: "Your Privacy Rights",
+      content: (
+        <>
+          <p className="mb-4">Depending on your location, you may have certain rights regarding your personal information, including:</p>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>Access to your personal information and the ability to receive a copy in a structured, commonly used format.</li>
+            <li>Correction of inaccurate or incomplete personal information.</li>
+            <li>Deletion of your personal information in certain circumstances.</li>
+            <li>Restriction or objection to certain processing activities.</li>
+            <li>Withdrawal of consent at any time, where processing is based on your consent.</li>
+          </ul>
+          <p>To exercise these rights, please contact us using the information provided in the "Contact Us" section.</p>
+        </>
+      )
+    },
+    {
+      title: "Data Security",
+      content: (
+        <>
+          <p className="mb-4">We implement appropriate security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. These measures include:</p>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>Encryption of sensitive data using industry-standard protocols.</li>
+            <li>Regular security assessments and testing of our systems and processes.</li>
+            <li>Access controls and authentication procedures for our staff and systems.</li>
+            <li>Regular backups and disaster recovery planning to prevent data loss.</li>
+          </ul>
+          <p>However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+        </>
+      )
+    },
+    {
+      title: "Cookies and Tracking Technologies",
+      content: (
+        <>
+          <p className="mb-4">We use cookies and similar tracking technologies to collect information about your browsing activities and to remember your preferences. These technologies help us:</p>
+          <ul className="list-disc pl-6 mb-4 space-y-2">
+            <li>Understand how you use our Platform and which pages you visit.</li>
+            <li>Remember your login status and course progress.</li>
+            <li>Personalize your experience and deliver relevant content.</li>
+            <li>Analyze the effectiveness of our features and marketing campaigns.</li>
+          </ul>
+          <p>You can set your browser to refuse all or some browser cookies or to alert you when cookies are being sent. However, if you disable or refuse cookies, some parts of the Platform may become inaccessible or not function properly.</p>
+        </>
+      )
+    }
+  ];
+
   return (
     <MainLayout>
       <div className="container mx-auto px-4 md:px-6 pt-24 pb-16">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-primary mb-6">
+        <div className="max-w-3xl mx-auto mb-12">
+          <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-primary mb-4 text-center">
             Privacy Policy
           </h1>
-          <p className="text-muted-foreground mb-8">
-            Last updated: June 1, 2023
+          <p className="text-center text-muted-foreground mb-6">
+            Last Updated: {lastUpdated}
           </p>
-
-          <div className="prose prose-slate max-w-none">
-            <p>
-              At StructoEdge, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+          
+          <div className="prose prose-gray max-w-none">
+            <p className="mb-6">
+              At StructoEdge, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform, website, and services (collectively, the "Platform").
+            </p>
+            <p className="mb-6">
+              Please read this Privacy Policy carefully. By accessing or using our Platform, you acknowledge that you have read, understood, and agree to be bound by the terms of this Privacy Policy.
             </p>
             
-            <h2 className="text-xl font-medium mt-8 mb-4">Information We Collect</h2>
-            <p>
-              We collect information that you provide directly to us when you:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 mb-4">
-              <li>Register for an account</li>
-              <li>Purchase a course or subscription</li>
-              <li>Complete forms on our website</li>
-              <li>Participate in forums or communities</li>
-              <li>Contact our support team</li>
-              <li>Subscribe to our newsletter</li>
-            </ul>
-            <p>
-              This information may include your name, email address, postal address, phone number, payment information, and other details you choose to provide.
-            </p>
+            <Accordion type="single" collapsible className="w-full mt-8">
+              {privacySections.map((section, index) => (
+                <AccordionItem key={index} value={`section-${index}`}>
+                  <AccordionTrigger className="text-lg font-medium">
+                    {section.title}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {section.content}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
             
-            <h2 className="text-xl font-medium mt-8 mb-4">Automatically Collected Information</h2>
-            <p>
-              When you visit our website or use our platform, we automatically collect certain information about your device, including:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 mb-4">
-              <li>IP address</li>
-              <li>Browser type and version</li>
-              <li>Operating system</li>
-              <li>Time zone setting</li>
-              <li>Pages visited and time spent on those pages</li>
-              <li>Unique device identifiers</li>
-            </ul>
+            <div className="mt-8">
+              <h2 className="text-xl font-medium mb-4">Changes to Our Privacy Policy</h2>
+              <p className="mb-4">
+                We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.
+              </p>
+              <p>
+                Your continued use of the Platform after we post any modifications to the Privacy Policy will constitute your acknowledgment of the modifications and your consent to abide and be bound by the modified Privacy Policy.
+              </p>
+            </div>
             
-            <h2 className="text-xl font-medium mt-8 mb-4">How We Use Your Information</h2>
-            <p>
-              We use the information we collect for various purposes, including:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 mb-4">
-              <li>Providing, maintaining, and improving our services</li>
-              <li>Processing transactions and sending related information</li>
-              <li>Sending administrative messages, updates, and security alerts</li>
-              <li>Responding to your comments, questions, and requests</li>
-              <li>Analyzing usage patterns to enhance user experience</li>
-              <li>Protecting against fraudulent, unauthorized, or illegal activity</li>
-            </ul>
-            
-            <h2 className="text-xl font-medium mt-8 mb-4">Sharing Your Information</h2>
-            <p>
-              We may share your personal information with:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 mb-4">
-              <li>Service providers who perform services on our behalf</li>
-              <li>Payment processors to complete transactions</li>
-              <li>Professional advisors, such as lawyers, accountants, and insurers</li>
-              <li>Government bodies when required by law</li>
-              <li>Third parties in connection with a merger, sale, or acquisition</li>
-            </ul>
-            
-            <h2 className="text-xl font-medium mt-8 mb-4">Your Rights and Choices</h2>
-            <p>
-              Depending on your location, you may have certain rights regarding your personal information, including:
-            </p>
-            <ul className="list-disc pl-6 space-y-2 mb-4">
-              <li>Accessing and receiving a copy of your personal information</li>
-              <li>Rectifying inaccurate or incomplete information</li>
-              <li>Deleting your personal information</li>
-              <li>Restricting or objecting to certain processing activities</li>
-              <li>Data portability</li>
-              <li>Withdrawing consent</li>
-            </ul>
-            
-            <h2 className="text-xl font-medium mt-8 mb-4">Security</h2>
-            <p>
-              We implement appropriate technical and organizational measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
-            </p>
-            
-            <h2 className="text-xl font-medium mt-8 mb-4">International Transfers</h2>
-            <p>
-              Your information may be transferred to, and processed in, countries other than the one in which you reside. These countries may have data protection laws that differ from those in your country.
-            </p>
-            
-            <h2 className="text-xl font-medium mt-8 mb-4">Changes to This Privacy Policy</h2>
-            <p>
-              We may update this Privacy Policy from time to time. The updated version will be indicated by an updated "Last Updated" date at the top of this document. We encourage you to review this Privacy Policy periodically.
-            </p>
-            
-            <h2 className="text-xl font-medium mt-8 mb-4">Contact Us</h2>
-            <p>
-              If you have any questions about this Privacy Policy, please contact us at:
-            </p>
-            <p className="mt-2">
-              <strong>Email:</strong> privacy@structoedge.com<br />
-              <strong>Address:</strong> 123 Engineering Way, Suite 400, San Francisco, CA 94103
-            </p>
+            <div className="mt-8">
+              <h2 className="text-xl font-medium mb-4">Contact Us</h2>
+              <p className="mb-4">
+                If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:
+              </p>
+              <p className="font-medium">privacy@structoedge.com</p>
+              <div className="mt-6">
+                <Link to="/help" className="text-primary hover:underline">
+                  Visit our Help Center
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

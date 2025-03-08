@@ -31,8 +31,8 @@ const Footer = () => {
               Structo<span className="text-accent">Edge</span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground max-w-md">
-              Empowering learners through elegant design and intuitive learning experiences.
-              Connect, learn, and grow with our curated courses.
+              Empowering structural engineers through elegant design and intuitive learning experiences.
+              Connect, learn, and grow with our curated engineering courses.
             </p>
             <div className="mt-6 flex items-center space-x-4">
               <a 
