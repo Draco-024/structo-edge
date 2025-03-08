@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
@@ -31,7 +30,7 @@ const Index = () => {
       image: 'https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
       category: 'Development',
       duration: '10 weeks',
-      level: 'Intermediate',
+      level: 'Intermediate' as 'Beginner' | 'Intermediate' | 'Advanced',
       rating: 4.8
     },
     {
@@ -42,7 +41,7 @@ const Index = () => {
       image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
       category: 'Design',
       duration: '6 weeks',
-      level: 'Beginner',
+      level: 'Beginner' as 'Beginner' | 'Intermediate' | 'Advanced',
       rating: 4.7
     },
     {
@@ -53,7 +52,7 @@ const Index = () => {
       image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
       category: 'Business',
       duration: '8 weeks',
-      level: 'Advanced',
+      level: 'Advanced' as 'Beginner' | 'Intermediate' | 'Advanced',
       rating: 4.9
     }
   ];
