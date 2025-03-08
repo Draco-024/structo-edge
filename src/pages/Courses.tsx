@@ -40,7 +40,7 @@ const Courses = () => {
     {
       id: '004',
       title: 'Digital Marketing Essentials',
-      description: 'Master digital marketing strategies that drive growth and engagement in today's competitive landscape.',
+      description: 'Master digital marketing strategies that drive growth and engagement in today\'s competitive landscape.',
       instructor: 'Jessica Taylor',
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
       category: 'Marketing',
