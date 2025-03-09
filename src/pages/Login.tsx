@@ -6,6 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getAuth, signInWithEmailAndPassword, signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [isPasswordLogin, setIsPasswordLogin] = useState(true);
+  const [showFirebaseLogin, setShowFirebaseLogin] = useState(false);
   const { toast } = useToast();
   const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
 
@@ -28,15 +30,37 @@ const Login = () => {
     }
 
     if (isPasswordLogin) {
-      // Regular login form submission
-      toast({
-        title: "Login successful",
-        description: "Welcome back to StructoEdge!",
-      });
-      
-      // Clear form
-      setEmail('');
-      setPassword('');
+      if (showFirebaseLogin) {
+        // Firebase email/password login
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            toast({
+              title: "Firebase login successful",
+              description: "Welcome back to StructoEdge!",
+            });
+            // Clear form
+            setEmail('');
+            setPassword('');
+          })
+          .catch((error) => {
+            toast({
+              title: "Login failed",
+              description: error.message,
+              variant: "destructive"
+            });
+          });
+      } else {
+        // Regular login form submission
+        toast({
+          title: "Login successful",
+          description: "Welcome back to StructoEdge!",
+        });
+        
+        // Clear form
+        setEmail('');
+        setPassword('');
+      }
     } else {
       // SMS OTP Authentication via Auth0
       loginWithRedirect({
@@ -49,11 +73,47 @@ const Login = () => {
   };
 
   const handleSMSLogin = () => {
-    loginWithRedirect({
-      authorizationParams: {
-        connection: 'sms',
+    if (showFirebaseLogin) {
+      // Firebase phone auth
+      const auth = getAuth();
+      try {
+        const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+          'size': 'normal',
+          'callback': () => {
+            // reCAPTCHA solved, allow signInWithPhoneNumber.
+            signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier)
+              .then((confirmationResult) => {
+                // SMS sent. Prompt user to type the code.
+                window.confirmationResult = confirmationResult;
+                toast({
+                  title: "OTP Sent",
+                  description: "Please check your phone for the verification code"
+                });
+              }).catch((error) => {
+                toast({
+                  title: "SMS Verification Failed",
+                  description: error.message,
+                  variant: "destructive"
+                });
+              });
+          }
+        });
+        recaptchaVerifier.render();
+      } catch (error: any) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive"
+        });
       }
-    });
+    } else {
+      // Auth0 SMS login
+      loginWithRedirect({
+        authorizationParams: {
+          connection: 'sms',
+        }
+      });
+    }
   };
 
   return (
@@ -70,6 +130,18 @@ const Login = () => {
           </div>
 
           <div className="bg-card border border-border rounded-lg p-6 md:p-8 shadow-sm">
+            {/* Toggle between auth providers */}
+            <div className="flex mb-4 justify-center">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setShowFirebaseLogin(!showFirebaseLogin)}
+                className="mb-2"
+              >
+                Switch to {showFirebaseLogin ? "Auth0" : "Firebase"} Login
+              </Button>
+            </div>
+
             {/* Toggle between password and OTP login */}
             <div className="flex mb-6 bg-muted rounded-md p-1">
               <button
@@ -142,7 +214,7 @@ const Login = () => {
                   type="submit" 
                   className="w-full"
                 >
-                  Sign in
+                  Sign in with {showFirebaseLogin ? "Firebase" : "Auth0"}
                 </Button>
               </form>
             ) : (
@@ -164,12 +236,16 @@ const Login = () => {
                   </p>
                 </div>
 
+                {showFirebaseLogin && (
+                  <div id="recaptcha-container" className="flex justify-center mb-4"></div>
+                )}
+
                 <Button 
                   onClick={handleSMSLogin} 
                   className="w-full"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Loading..." : "Send OTP"}
+                  {isLoading ? "Loading..." : `Send OTP with ${showFirebaseLogin ? "Firebase" : "Auth0"}`}
                 </Button>
               </div>
             )}
