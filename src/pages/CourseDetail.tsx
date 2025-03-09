@@ -1,17 +1,20 @@
 
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useState } from 'react';
+import { useToast } from "@/components/ui/use-toast";
+import { ShoppingCart } from "lucide-react";
 
 const CourseDetail = () => {
-  const { id } = useParams();
+  const { courseId } = useParams();
   const [currentVideo, setCurrentVideo] = useState(0);
+  const { toast } = useToast();
   
   // This would typically come from an API, but for demo purposes:
   const courseData = {
-    id: id,
+    id: courseId,
     title: 'Fundamentals of Structural Analysis',
     description: 'This comprehensive course covers the core principles of structural analysis essential for modern engineering projects. Learn to analyze and understand the behavior of structures under various loading conditions.',
     instructor: 'Dr. Robert Chen',
@@ -54,18 +57,33 @@ const CourseDetail = () => {
         ]
       }
     ],
-    videos: [
-      'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      'https://www.youtube.com/embed/dQw4w9WgXcQ'
-    ]
   };
 
+  // YouTube playlist videos from the provided playlist
   const videoURLs = [
-    "https://www.youtube.com/embed/dQw4w9WgXcQ?si=abcdefghijklmno",
-    "https://www.youtube.com/embed/dQw4w9WgXcQ?si=pqrstuvwxyz1234",
-    "https://www.youtube.com/embed/dQw4w9WgXcQ?si=5678abcdefghijk"
+    "https://www.youtube.com/embed/E01h_S68qYE?si=9DwJXoL3KZdqzuO9",
+    "https://www.youtube.com/embed/aLYGJQRivC4?si=8QhkE-2oo5qoaXK0",
+    "https://www.youtube.com/embed/sSFWJD4ij_U?si=iUxijKUl6x5iV0hl",
+    "https://www.youtube.com/embed/GkLYm9kRzT8?si=oGUYFtb9yw-fzWDT",
+    "https://www.youtube.com/embed/QHgJBUX-Xw4?si=kCk7Z_Ii_-MzNkN6",
+    "https://www.youtube.com/embed/4QOyBX0nKQs?si=h9uQzZdNi9D6XQkJ"
   ];
+
+  const handleAddToCart = () => {
+    toast({
+      title: "Added to cart",
+      description: `${courseData.title} has been added to your cart.`,
+    });
+    // In a real application, this would update the cart state
+  };
+
+  const handleAddToWishlist = () => {
+    toast({
+      title: "Added to wishlist",
+      description: `${courseData.title} has been added to your wishlist.`,
+    });
+    // In a real application, this would update the wishlist state
+  };
 
   return (
     <MainLayout>
@@ -99,7 +117,7 @@ const CourseDetail = () => {
                   >
                     <div className="flex flex-col items-center text-center">
                       <span className="text-lg font-medium">Lecture {index + 1}</span>
-                      <span className="text-xs text-muted-foreground">Week {index + 1}</span>
+                      <span className="text-xs text-muted-foreground">Week {Math.floor(index / 3) + 1}</span>
                     </div>
                   </div>
                 ))}
@@ -231,8 +249,18 @@ const CourseDetail = () => {
                 <span className="text-3xl font-medium text-primary">{courseData.price}</span>
               </div>
               
-              <Button className="w-full mb-4">Enroll Now</Button>
-              <Button variant="outline" className="w-full mb-6">Add to Wishlist</Button>
+              <Link to="/payment">
+                <Button className="w-full mb-4">Enroll Now</Button>
+              </Link>
+              <Link to="/cart">
+                <Button variant="outline" className="w-full mb-4" onClick={handleAddToCart}>
+                  <ShoppingCart className="mr-2 h-4 w-4" />
+                  Add to Cart
+                </Button>
+              </Link>
+              <Button variant="outline" className="w-full mb-6" onClick={handleAddToWishlist}>
+                Add to Wishlist
+              </Button>
               
               <div className="space-y-4">
                 <div className="flex justify-between">

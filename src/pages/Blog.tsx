@@ -3,7 +3,7 @@ import MainLayout from '@/layouts/MainLayout';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building, Clock, User, CalendarDays } from "lucide-react";
+import { Clock, User, CalendarDays } from "lucide-react";
 
 const Blog = () => {
   const blogPosts = [
@@ -15,7 +15,7 @@ const Blog = () => {
       category: 'Materials',
       date: 'October 15, 2023',
       readTime: '8 min read',
-      image: 'https://images.unsplash.com/photo-1518228684985-87685f9c6916?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+      image: 'https://images.unsplash.com/photo-1545328805-821390a9c406?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     },
     {
       id: '002',
@@ -25,7 +25,7 @@ const Blog = () => {
       category: 'Analysis',
       date: 'September 28, 2023',
       readTime: '12 min read',
-      image: 'https://images.unsplash.com/photo-1534193708707-6c5e7d3a0b81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+      image: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     },
     {
       id: '003',
@@ -35,7 +35,7 @@ const Blog = () => {
       category: 'Seismic',
       date: 'August 10, 2023',
       readTime: '10 min read',
-      image: 'https://images.unsplash.com/photo-1559314809-406a5a5fb9fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+      image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     },
     {
       id: '004',
@@ -45,7 +45,7 @@ const Blog = () => {
       category: 'Bridges',
       date: 'July 22, 2023',
       readTime: '9 min read',
-      image: 'https://images.unsplash.com/photo-1605464315542-bda3e2f4e605?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+      image: 'https://images.unsplash.com/photo-1546500417-1465443272e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     },
     {
       id: '005',
@@ -55,7 +55,7 @@ const Blog = () => {
       category: 'Technology',
       date: 'June 15, 2023',
       readTime: '7 min read',
-      image: 'https://images.unsplash.com/photo-1560732488-7b5f5b8c8f99?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+      image: 'https://images.unsplash.com/photo-1584949091598-c31daaaa4aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     },
     {
       id: '006',
@@ -65,7 +65,7 @@ const Blog = () => {
       category: 'Codes & Standards',
       date: 'May 30, 2023',
       readTime: '11 min read',
-      image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+      image: 'https://images.unsplash.com/photo-1601055903647-ddf1ee9701b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     }
   ];
 

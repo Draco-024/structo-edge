@@ -2,7 +2,8 @@
 import MainLayout from '@/layouts/MainLayout';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Check, Phone } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const Pricing = () => {
   const pricingPlans = [
@@ -19,7 +20,8 @@ const Pricing = () => {
         "Email support"
       ],
       recommended: false,
-      btnText: "Purchase Course"
+      btnText: "Purchase Course",
+      link: "/payment"
     },
     {
       name: "Professional",
@@ -35,7 +37,8 @@ const Pricing = () => {
         "Access to community forum"
       ],
       recommended: true,
-      btnText: "Start Free Trial"
+      btnText: "Start Free Trial",
+      link: "/payment"
     },
     {
       name: "Enterprise",
@@ -51,7 +54,8 @@ const Pricing = () => {
         "Custom course development"
       ],
       recommended: false,
-      btnText: "Contact Sales"
+      btnText: "Contact Sales",
+      isContact: true
     }
   ];
 
@@ -99,12 +103,26 @@ const Pricing = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button 
-                  className={`w-full ${plan.recommended ? 'bg-primary hover:bg-primary/90' : ''}`}
-                  variant={plan.recommended ? 'default' : 'outline'}
-                >
-                  {plan.btnText}
-                </Button>
+                {plan.isContact ? (
+                  <Button 
+                    className={`w-full flex items-center ${plan.recommended ? 'bg-primary hover:bg-primary/90' : ''}`}
+                    variant={plan.recommended ? 'default' : 'outline'}
+                    as="a"
+                    href="tel:8788017458"
+                  >
+                    <Phone className="mr-2 h-4 w-4" />
+                    {plan.btnText} (878-801-7458)
+                  </Button>
+                ) : (
+                  <Link to={plan.link} className="w-full">
+                    <Button 
+                      className={`w-full ${plan.recommended ? 'bg-primary hover:bg-primary/90' : ''}`}
+                      variant={plan.recommended ? 'default' : 'outline'}
+                    >
+                      {plan.btnText}
+                    </Button>
+                  </Link>
+                )}
               </CardFooter>
             </Card>
           ))}
