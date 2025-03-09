@@ -1,4 +1,3 @@
-
 import { useParams, Link } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -51,7 +50,7 @@ const CourseDetail = () => {
           options: [
             { id: "a", text: "Dr. Robert Chen" },
             { id: "b", text: "Dr. Emily Wong" },
-            { id: "c", text: "Dr. Vishal Kumar" },
+            { id: "c", text: "Er. Vishal More" },
             { id: "d", text: "Dr. Sarah Johnson" }
           ],
           correctOption: "c"
@@ -94,7 +93,7 @@ const CourseDetail = () => {
     id: courseId,
     title: 'Fundamentals of Structural Analysis',
     description: 'This comprehensive course covers the core principles of structural analysis essential for modern engineering projects. Learn to analyze and understand the behavior of structures under various loading conditions.',
-    instructor: 'Dr. Vishal Kumar',
+    instructor: 'Er. Vishal More',
     image: 'https://images.unsplash.com/photo-1470093851219-69951fcbb533?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
     price: '₹11,999',
     rating: 4.8,
@@ -136,14 +135,28 @@ const CourseDetail = () => {
     ],
   };
 
-  // YouTube playlist videos from the provided playlist
+  // Updated YouTube playlist videos from the provided links
   const videoURLs = [
-    "https://www.youtube.com/embed/E01h_S68qYE?si=9DwJXoL3KZdqzuO9",
-    "https://www.youtube.com/embed/aLYGJQRivC4?si=8QhkE-2oo5qoaXK0",
-    "https://www.youtube.com/embed/sSFWJD4ij_U?si=iUxijKUl6x5iV0hl",
-    "https://www.youtube.com/embed/GkLYm9kRzT8?si=oGUYFtb9yw-fzWDT",
-    "https://www.youtube.com/embed/QHgJBUX-Xw4?si=kCk7Z_Ii_-MzNkN6",
-    "https://www.youtube.com/embed/4QOyBX0nKQs?si=h9uQzZdNi9D6XQkJ"
+    "https://www.youtube.com/embed/XJbVuq_2MCY?si=9DwJXoL3KZdqzuO9",
+    "https://www.youtube.com/embed/5C0BZp_HZP8?si=8QhkE-2oo5qoaXK0",
+    "https://www.youtube.com/embed/eld9F-KTZY0?si=iUxijKUl6x5iV0hl",
+    "https://www.youtube.com/embed/-gAAcg6mUBI?si=oGUYFtb9yw-fzWDT",
+    "https://www.youtube.com/embed/-Tp-jh1f7Wc?si=kCk7Z_Ii_-MzNkN6",
+    "https://www.youtube.com/embed/k40vTnrX_bc?si=h9uQzZdNi9D6XQkJ",
+    "https://www.youtube.com/embed/Vv_lJwWXlKA?si=9DwJXoL3KZdqzuO9",
+    "https://www.youtube.com/embed/deUHMZZ2pIo?si=8QhkE-2oo5qoaXK0",
+    "https://www.youtube.com/embed/x38Sqqj9ASw?si=iUxijKUl6x5iV0hl",
+    "https://www.youtube.com/embed/evESmg6SSNM?si=oGUYFtb9yw-fzWDT",
+    "https://www.youtube.com/embed/_xzYEZxvyIk?si=kCk7Z_Ii_-MzNkN6",
+    "https://www.youtube.com/embed/JpMTDIRZERU?si=h9uQzZdNi9D6XQkJ",
+    "https://www.youtube.com/embed/BpZpINWZ23I?si=9DwJXoL3KZdqzuO9",
+    "https://www.youtube.com/embed/U6kWb83Q2ug?si=8QhkE-2oo5qoaXK0",
+    "https://www.youtube.com/embed/aFlVIGWkDAM?si=iUxijKUl6x5iV0hl",
+    "https://www.youtube.com/embed/r-zvK9sQ3YE?si=oGUYFtb9yw-fzWDT",
+    "https://www.youtube.com/embed/0NQAsIyOch8?si=kCk7Z_Ii_-MzNkN6",
+    "https://www.youtube.com/embed/M4w6l6puPzo?si=h9uQzZdNi9D6XQkJ",
+    "https://www.youtube.com/embed/wF73q3K9JTg?si=9DwJXoL3KZdqzuO9",
+    "https://www.youtube.com/embed/tApdZ75W3pE?si=8QhkE-2oo5qoaXK0"
   ];
 
   const handleAddToCart = () => {
@@ -199,7 +212,7 @@ const CourseDetail = () => {
   const handleQuizComplete = (score: number, total: number) => {
     toast({
       title: "Quiz completed!",
-      description: `You scored ${score} out of ${total}.`,
+      description: `You scored ${score} out of ${total}. Certificate available in your profile.`,
     });
     setShowQuiz(false);
   };

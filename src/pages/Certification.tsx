@@ -6,8 +6,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Award, Download, Edit2 } from "lucide-react";
+import { Award, Download, Edit2, FileDown } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from 'react-router-dom';
 
 const Certification = () => {
   const [name, setName] = useState('');
@@ -15,6 +16,7 @@ const Certification = () => {
   const [isEditing, setIsEditing] = useState(true);
   const [certificateGenerated, setCertificateGenerated] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSave = () => {
     if (!name || !email) {
@@ -43,7 +45,10 @@ const Certification = () => {
       title: "Certificate downloaded",
       description: "Your certificate has been downloaded successfully.",
     });
-    // In a real app, this would trigger a PDF download
+    // Simulate download PDF - in a real app, this would be a PDF download
+    setTimeout(() => {
+      navigate('/certification/download-pdf', { state: { name, email, course: 'Fundamentals of Structural Analysis' } });
+    }, 1000);
   };
 
   return (
@@ -135,7 +140,7 @@ const Certification = () => {
                     <div className="flex justify-between items-center mt-12">
                       <div className="text-center">
                         <div className="w-40 border-t border-gray-400 mx-auto"></div>
-                        <p className="mt-2 text-muted-foreground">Dr. Vishal Kumar</p>
+                        <p className="mt-2 text-muted-foreground">Er. Vishal More</p>
                         <p className="text-xs text-muted-foreground">Lead Instructor</p>
                       </div>
                       <div className="text-center">
@@ -176,6 +181,8 @@ const Certification = () => {
                   <Button variant="outline" className="w-full" onClick={() => {
                     setCertificateGenerated(true);
                     setIsEditing(false);
+                    setName(name || "Your Name");
+                    setEmail(email || "your.email@example.com");
                   }}>
                     <Award className="mr-2 h-4 w-4" />
                     View Certificate
@@ -193,6 +200,8 @@ const Certification = () => {
                   <Button variant="outline" className="w-full" onClick={() => {
                     setCertificateGenerated(true);
                     setIsEditing(false);
+                    setName(name || "Your Name");
+                    setEmail(email || "your.email@example.com");
                   }}>
                     <Award className="mr-2 h-4 w-4" />
                     View Certificate

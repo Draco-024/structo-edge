@@ -1,25 +1,24 @@
-
 import MainLayout from '@/layouts/MainLayout';
 
 const About = () => {
   const team = [
     {
-      name: "Sarah Johnson",
+      name: "Er. Vishal More",
       role: "Founder & CEO",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      bio: "Former lead designer at Apple with over 15 years of experience in education technology."
+      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
+      bio: "Structural engineering expert with over 15 years of experience in education technology and professional practice."
     },
     {
-      name: "David Chen",
+      name: "Atharva Suryawanshi",
       role: "Chief Technology Officer",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      bio: "Engineering leader with experience at Google and edtech startups focused on accessible learning."
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
+      bio: "Engineering leader with experience at major tech companies and edtech startups focused on accessible learning."
     },
     {
-      name: "Emily Wong",
+      name: "Er. Vishal More",
       role: "Head of Education",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      bio: "PhD in Education with a passion for creating engaging learning experiences for all students."
+      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
+      bio: "Ph.D. in Structural Engineering with a passion for creating engaging learning experiences for all students."
     }
   ];
 
@@ -53,7 +52,7 @@ const About = () => {
         <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
           <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M23 21v-2a4 4 0 0 1 0 7.75" />
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
         </svg>
       )
@@ -69,7 +68,7 @@ const About = () => {
             About StructoEdge
           </h1>
           <p className="text-lg text-muted-foreground">
-            We're reimagining education through the lens of intentional design and meaningful learning experiences.
+            We're reimagining structural engineering education through the lens of intentional design and meaningful learning experiences.
           </p>
         </div>
 
@@ -80,10 +79,10 @@ const About = () => {
               Our Mission
             </h2>
             <p className="text-lg leading-relaxed mb-6">
-              At StructoEdge, we believe that learning experiences should be designed with the same level of care and attention to detail as the world's most beloved products. We're on a mission to create educational content that combines elegance, simplicity, and functionality to help learners achieve their goals.
+              At StructoEdge, we believe that learning experiences in structural engineering should be designed with the same level of care and attention to detail as the structures we build. We're on a mission to create educational content that combines elegance, simplicity, and functionality to help engineers achieve their goals.
             </p>
             <p className="text-lg leading-relaxed">
-              Founded in 2023, we bring together experts from education, design, and technology to create courses that don't just teach skills, but inspire creativity and foster deep understanding.
+              Founded in 2023 by Er. Vishal More, we bring together experts from structural engineering, design, and technology to create courses that don't just teach skills, but inspire creativity and foster deep understanding of engineering principles.
             </p>
           </div>
         </div>

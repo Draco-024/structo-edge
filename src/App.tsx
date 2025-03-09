@@ -22,6 +22,7 @@ import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Certification from "./pages/Certification";
 import QuizPage from "./pages/QuizPage";
+import CertificateDownload from "./pages/CertificateDownload";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/cart" element={<Cart />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/certification" element={<Certification />} />
+          <Route path="/certification/download-pdf" element={<CertificateDownload />} />
           <Route path="/quiz/:quizId" element={<QuizPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
