@@ -10,7 +10,7 @@ const Pricing = () => {
     {
       name: "Basic",
       description: "Essential structural engineering courses to get you started",
-      price: "$149",
+      price: "₹11,999",
       duration: "per course",
       features: [
         "Access to individual course materials",
@@ -26,7 +26,7 @@ const Pricing = () => {
     {
       name: "Professional",
       description: "Full access to our comprehensive curriculum",
-      price: "$49",
+      price: "₹3,999",
       duration: "per month",
       features: [
         "Access to all courses",
@@ -104,15 +104,15 @@ const Pricing = () => {
               </CardContent>
               <CardFooter>
                 {plan.isContact ? (
-                  <Button 
-                    className={`w-full flex items-center ${plan.recommended ? 'bg-primary hover:bg-primary/90' : ''}`}
-                    variant={plan.recommended ? 'default' : 'outline'}
-                    as="a"
-                    href="tel:8788017458"
-                  >
-                    <Phone className="mr-2 h-4 w-4" />
-                    {plan.btnText} (878-801-7458)
-                  </Button>
+                  <a href="tel:8788017458" className="w-full">
+                    <Button 
+                      className={`w-full flex items-center ${plan.recommended ? 'bg-primary hover:bg-primary/90' : ''}`}
+                      variant={plan.recommended ? 'default' : 'outline'}
+                    >
+                      <Phone className="mr-2 h-4 w-4" />
+                      {plan.btnText} (878-801-7458)
+                    </Button>
+                  </a>
                 ) : (
                   <Link to={plan.link} className="w-full">
                     <Button 

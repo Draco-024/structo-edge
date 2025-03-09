@@ -20,6 +20,8 @@ import Careers from "./pages/Careers";
 import Privacy from "./pages/Privacy";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
+import Certification from "./pages/Certification";
+import QuizPage from "./pages/QuizPage";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +47,8 @@ const App = () => (
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/certification" element={<Certification />} />
+          <Route path="/quiz/:quizId" element={<QuizPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
