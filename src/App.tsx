@@ -23,6 +23,7 @@ import Payment from "./pages/Payment";
 import Certification from "./pages/Certification";
 import QuizPage from "./pages/QuizPage";
 import CertificateDownload from "./pages/CertificateDownload";
+import { Auth0ProviderWithNavigate } from "./contexts/Auth0Provider";
 
 const queryClient = new QueryClient();
 
@@ -32,28 +33,30 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/:courseId" element={<CourseDetail />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/certification" element={<Certification />} />
-          <Route path="/certification/download-pdf" element={<CertificateDownload />} />
-          <Route path="/quiz/:quizId" element={<QuizPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Auth0ProviderWithNavigate>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/courses/:courseId" element={<CourseDetail />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/certification" element={<Certification />} />
+            <Route path="/certification/download-pdf" element={<CertificateDownload />} />
+            <Route path="/quiz/:quizId" element={<QuizPage />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Auth0ProviderWithNavigate>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

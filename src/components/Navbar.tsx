@@ -2,12 +2,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X, Award } from 'lucide-react';
+import { Menu, X, Award, User, LogOut } from 'lucide-react';
+import { useAuth0 } from "@auth0/auth0-react";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,23 +70,46 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center space-x-4">
-          <Link
-            to="/login"
-            className="px-4 py-2 text-sm font-medium text-primary hidden md:inline-block transition-all duration-300 ease-out hover:text-accent"
-          >
-            Log in
-          </Link>
-          <Link
-            to="/register"
-            className={cn(
-              'px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ease-out',
-              isScrolled
-                ? 'bg-primary text-white hover:bg-primary/90'
-                : 'bg-primary/90 text-white hover:bg-primary'
-            )}
-          >
-            Get Started
-          </Link>
+          {isAuthenticated ? (
+            <div className="flex items-center space-x-2">
+              <div className="hidden md:flex items-center space-x-1 mr-2">
+                <div className="text-sm font-medium">
+                  Hi, {user?.name || user?.email || "User"}
+                </div>
+              </div>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => logout({ 
+                  logoutParams: { returnTo: window.location.origin } 
+                })}
+                className="flex items-center"
+              >
+                <LogOut className="h-4 w-4 mr-1" />
+                <span className="hidden md:inline">Logout</span>
+              </Button>
+            </div>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="px-4 py-2 text-sm font-medium text-primary hidden md:inline-block transition-all duration-300 ease-out hover:text-accent"
+              >
+                Log in
+              </Link>
+              <Link
+                to="/register"
+                className={cn(
+                  'px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ease-out',
+                  isScrolled
+                    ? 'bg-primary text-white hover:bg-primary/90'
+                    : 'bg-primary/90 text-white hover:bg-primary'
+                )}
+              >
+                Get Started
+              </Link>
+            </>
+          )}
           
           {/* Mobile menu button */}
           <button
@@ -121,13 +147,31 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="border-t border-border my-2 pt-2">
-                <Link
-                  to="/login"
-                  className="block px-4 py-3 rounded-md text-sm font-medium text-primary hover:bg-muted"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Log in
-                </Link>
+                {isAuthenticated ? (
+                  <>
+                    <div className="px-4 py-2 text-sm font-medium">
+                      {user?.name || user?.email || "User"}
+                    </div>
+                    <Button 
+                      variant="ghost"
+                      className="w-full justify-start px-4 py-3 text-left"
+                      onClick={() => logout({ 
+                        logoutParams: { returnTo: window.location.origin } 
+                      })}
+                    >
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="block px-4 py-3 rounded-md text-sm font-medium text-primary hover:bg-muted"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Log in
+                  </Link>
+                )}
               </div>
             </nav>
           </div>

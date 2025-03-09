@@ -3,25 +3,57 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import { useToast } from "@/components/ui/use-toast";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [isPasswordLogin, setIsPasswordLogin] = useState(true);
   const { toast } = useToast();
+  const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // In a real app, you would handle authentication here
-    toast({
-      title: "Login successful",
-      description: "Welcome back to StructoEdge!",
+    if (isAuthenticated) {
+      toast({
+        title: "Already logged in",
+        description: "You are already authenticated",
+      });
+      return;
+    }
+
+    if (isPasswordLogin) {
+      // Regular login form submission
+      toast({
+        title: "Login successful",
+        description: "Welcome back to StructoEdge!",
+      });
+      
+      // Clear form
+      setEmail('');
+      setPassword('');
+    } else {
+      // SMS OTP Authentication via Auth0
+      loginWithRedirect({
+        authorizationParams: {
+          connection: 'sms',
+          phoneNumber: phoneNumber
+        }
+      });
+    }
+  };
+
+  const handleSMSLogin = () => {
+    loginWithRedirect({
+      authorizationParams: {
+        connection: 'sms',
+      }
     });
-    
-    // Clear form
-    setEmail('');
-    setPassword('');
   };
 
   return (
@@ -38,62 +70,109 @@ const Login = () => {
           </div>
 
           <div className="bg-card border border-border rounded-lg p-6 md:p-8 shadow-sm">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium text-foreground block">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
-                  placeholder="you@example.com"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="text-sm font-medium text-foreground block">
-                    Password
-                  </label>
-                  <Link to="/forgot-password" className="text-sm text-accent hover:text-accent/80 transition-colors">
-                    Forgot password?
-                  </Link>
-                </div>
-                <input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="w-full px-3 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
-                  placeholder="••••••••"
-                />
-              </div>
-
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="h-4 w-4 text-accent focus:ring-accent border-border rounded"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-muted-foreground">
-                  Remember me
-                </label>
-              </div>
-
+            {/* Toggle between password and OTP login */}
+            <div className="flex mb-6 bg-muted rounded-md p-1">
               <button
-                type="submit"
-                className="w-full bg-primary text-white rounded-md py-2 px-4 hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${
+                  isPasswordLogin ? 'bg-white shadow-sm' : ''
+                }`}
+                onClick={() => setIsPasswordLogin(true)}
               >
-                Sign in
+                Password
               </button>
-            </form>
+              <button
+                className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${
+                  !isPasswordLogin ? 'bg-white shadow-sm' : ''
+                }`}
+                onClick={() => setIsPasswordLogin(false)}
+              >
+                SMS OTP
+              </button>
+            </div>
+
+            {isPasswordLogin ? (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium text-foreground block">
+                    Email
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="you@example.com"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <label htmlFor="password" className="text-sm font-medium text-foreground block">
+                      Password
+                    </label>
+                    <Link to="/forgot-password" className="text-sm text-accent hover:text-accent/80 transition-colors">
+                      Forgot password?
+                    </Link>
+                  </div>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="••••••••"
+                  />
+                </div>
+
+                <div className="flex items-center">
+                  <input
+                    id="remember-me"
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="h-4 w-4 text-accent focus:ring-accent border-border rounded"
+                  />
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-muted-foreground">
+                    Remember me
+                  </label>
+                </div>
+
+                <Button 
+                  type="submit" 
+                  className="w-full"
+                >
+                  Sign in
+                </Button>
+              </form>
+            ) : (
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="phone" className="text-sm font-medium text-foreground block">
+                    Phone Number
+                  </label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    required
+                    placeholder="+91 9876543210"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Enter your phone number with country code (e.g., +91 for India)
+                  </p>
+                </div>
+
+                <Button 
+                  onClick={handleSMSLogin} 
+                  className="w-full"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Loading..." : "Send OTP"}
+                </Button>
+              </div>
+            )}
 
             <div className="mt-6 text-center">
               <p className="text-sm text-muted-foreground">
