@@ -1,3 +1,4 @@
+
 import MainLayout from '@/layouts/MainLayout';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -212,14 +213,16 @@ const BlogCard = ({ post }: BlogCardProps) => {
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow h-full flex flex-col">
       <div className="aspect-video w-full overflow-hidden">
-        <img 
-          src={post.image} 
-          alt={post.title} 
-          className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80";
-          }}
-        />
+        <Link to={`/blog/${post.id}`}>
+          <img 
+            src={post.image} 
+            alt={post.title} 
+            className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80";
+            }}
+          />
+        </Link>
       </div>
       <CardHeader className="pb-2">
         <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-2">

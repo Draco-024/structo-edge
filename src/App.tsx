@@ -15,9 +15,12 @@ import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
 import Features from "./pages/Features";
 import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 import Help from "./pages/Help";
 import Careers from "./pages/Careers";
 import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Cookies from "./pages/Cookies";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Certification from "./pages/Certification";
@@ -45,9 +48,12 @@ const App = () => (
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/features" element={<Features />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:blogId" element={<BlogDetail />} />
             <Route path="/help" element={<Help />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/cookies" element={<Cookies />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/certification" element={<Certification />} />

@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, HelpCircle, Mail, Book, PlayCircle, FileText } from "lucide-react";
+import { Search, HelpCircle, Mail, Book, PlayCircle, FileText, Phone } from "lucide-react";
 
 const Help = () => {
   const faqs = [
@@ -126,26 +126,30 @@ const Help = () => {
               ))}
             </div>
           </TabsContent>
-          
-          <TabsContent value="contact">
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
-              <div className="bg-muted/30 rounded-lg p-6">
-                <div className="flex items-center mb-4">
-                  <Mail className="h-6 w-6 text-primary mr-2" />
-                  <h3 className="text-lg font-medium">Email Support</h3>
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  For general inquiries and account issues, our support team is ready to help.
-                </p>
-                <p className="font-medium">vishalmore9192@gmail.com</p>
-                <p className="text-sm text-muted-foreground">Response time: Within 24 hours</p>
-              </div>
-            </div>
-          </TabsContent>
         </Tabs>
 
+        {/* Contact Support Section */}
+        <div className="max-w-2xl mx-auto mt-16 p-6 bg-muted/30 rounded-lg border border-border">
+          <h2 className="text-2xl font-medium mb-6 text-center">Need More Help?</h2>
+          <div className="space-y-4">
+            <div className="flex items-center">
+              <Phone className="h-5 w-5 mr-3 text-primary" />
+              <a href="tel:+918788017458" className="hover:text-primary transition-colors">+91 8788017458</a>
+            </div>
+            <div className="flex items-center">
+              <Mail className="h-5 w-5 mr-3 text-primary" />
+              <a href="mailto:vishalmore9192@gmail.com" className="hover:text-primary transition-colors">vishalmore9192@gmail.com</a>
+            </div>
+            <div className="flex items-center">
+              <Phone className="h-5 w-5 mr-3 text-primary" />
+              <span>WhatsApp: 8788017458</span>
+            </div>
+          </div>
+          <Button className="w-full mt-6">Contact Support</Button>
+        </div>
+
         {/* Help Topics */}
-        <div className="text-center">
+        <div className="text-center mt-16">
           <h2 className="text-2xl font-medium mb-8">Popular Help Topics</h2>
           <div className="flex flex-wrap justify-center gap-4">
             {["Course Access", "Payments", "Certificates", "Technical Issues", "Mobile App", "Enterprise Solutions"].map((topic, index) => (
