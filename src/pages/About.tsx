@@ -1,4 +1,6 @@
+
 import MainLayout from '@/layouts/MainLayout';
+import { PhoneCall, Mail, MessageSquare } from 'lucide-react';
 
 const About = () => {
   const team = [
@@ -9,7 +11,7 @@ const About = () => {
       bio: "Structural engineering expert with over 15 years of experience in education technology and professional practice."
     },
     {
-      name: "Atharva Suryawanshi",
+      name: "Er. Vishal More",
       role: "Chief Technology Officer",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
       bio: "Engineering leader with experience at major tech companies and edtech startups focused on accessible learning."
@@ -70,6 +72,69 @@ const About = () => {
           <p className="text-lg text-muted-foreground">
             We're reimagining structural engineering education through the lens of intentional design and meaningful learning experiences.
           </p>
+        </div>
+
+        {/* Trimurti Infrastructure Section */}
+        <div className="max-w-4xl mx-auto mb-20">
+          <div className="bg-muted/30 border border-border rounded-lg p-8 md:p-10">
+            <h2 className="text-2xl md:text-3xl font-medium tracking-tight text-primary mb-6">
+              Trimurti Infrastructure – Engineering Your Dreams into Reality!
+            </h2>
+            
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-medium mb-3">📌 Services:</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <span className="text-accent mr-2">✔️</span>
+                    <span>RCC Structure Design (STAAD.Pro, ETABS, AutoCAD, Revit)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent mr-2">✔️</span>
+                    <span>Earthquake-Resistant Design & Analysis</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent mr-2">✔️</span>
+                    <span>Project Consultation & Site Supervision</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-accent mr-2">✔️</span>
+                    <span>Quantity Estimation (MT/Kg)</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                <a href="tel:+918788017458" className="flex items-center p-4 bg-background rounded-lg border border-border hover:shadow-md transition-all">
+                  <PhoneCall className="h-5 w-5 text-accent mr-2" />
+                  <span>+91 8788017458</span>
+                </a>
+                <a href="mailto:vishalmore9192@gmail.com" className="flex items-center p-4 bg-background rounded-lg border border-border hover:shadow-md transition-all">
+                  <Mail className="h-5 w-5 text-accent mr-2" />
+                  <span>vishalmore9192@gmail.com</span>
+                </a>
+                <a href="https://wa.me/918788017458" target="_blank" rel="noopener noreferrer" className="flex items-center p-4 bg-background rounded-lg border border-border hover:shadow-md transition-all">
+                  <MessageSquare className="h-5 w-5 text-accent mr-2" />
+                  <span>WhatsApp: 8788017458</span>
+                </a>
+              </div>
+              
+              <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary">
+                  🔹 Innovative
+                </span>
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary">
+                  🔹 Safe
+                </span>
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary">
+                  🔹 Cost-Effective
+                </span>
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary">
+                  🔹 Reliable
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Mission Section */}

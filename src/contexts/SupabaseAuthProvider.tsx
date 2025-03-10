@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { Session, User } from '@supabase/supabase-js';
+import { toast } from 'sonner';
 
 type SupabaseAuthContextType = {
   session: Session | null;
@@ -49,9 +50,11 @@ export const SupabaseAuthProvider = ({ children }: SupabaseAuthProviderProps) =>
         setIsLoading(false);
         
         if (event === 'SIGNED_IN' && session) {
+          toast.success('Successfully signed in!');
           navigate('/');
         }
         if (event === 'SIGNED_OUT') {
+          toast.info('Signed out successfully');
           navigate('/login');
         }
       }
@@ -64,27 +67,38 @@ export const SupabaseAuthProvider = ({ children }: SupabaseAuthProviderProps) =>
 
   const signInWithGoogle = async () => {
     try {
+      setIsLoading(true);
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          }
         },
       });
       
       if (error) throw error;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error signing in with Google:', error);
+      toast.error(`Login failed: ${error.message || 'Unknown error'}`);
+      setIsLoading(false);
       throw error;
     }
   };
 
   const signOut = async () => {
     try {
+      setIsLoading(true);
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error signing out:', error);
+      toast.error(`Sign out failed: ${error.message || 'Unknown error'}`);
       throw error;
+    } finally {
+      setIsLoading(false);
     }
   };
 
