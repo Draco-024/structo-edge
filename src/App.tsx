@@ -23,7 +23,7 @@ import Payment from "./pages/Payment";
 import Certification from "./pages/Certification";
 import QuizPage from "./pages/QuizPage";
 import CertificateDownload from "./pages/CertificateDownload";
-import { Auth0ProviderWithNavigate } from "./contexts/Auth0Provider";
+import { SupabaseAuthProvider } from "./contexts/SupabaseAuthProvider";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +33,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Auth0ProviderWithNavigate>
+        <SupabaseAuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/courses" element={<Courses />} />
@@ -56,7 +56,7 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </Auth0ProviderWithNavigate>
+        </SupabaseAuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

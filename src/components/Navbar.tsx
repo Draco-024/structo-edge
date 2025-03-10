@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Menu, X, Award, User, LogOut } from 'lucide-react';
-import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "@/components/ui/button";
+import { useSupabaseAuth } from '@/contexts/SupabaseAuthProvider';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
+  const { user, signOut, signInWithGoogle, isLoading } = useSupabaseAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,19 +70,17 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center space-x-4">
-          {isAuthenticated ? (
+          {user ? (
             <div className="flex items-center space-x-2">
               <div className="hidden md:flex items-center space-x-1 mr-2">
                 <div className="text-sm font-medium">
-                  Hi, {user?.name || user?.email || "User"}
+                  Hi, {user?.user_metadata?.full_name || user.email || "User"}
                 </div>
               </div>
               <Button 
                 variant="ghost" 
                 size="sm"
-                onClick={() => logout({ 
-                  logoutParams: { returnTo: window.location.origin } 
-                })}
+                onClick={() => signOut()}
                 className="flex items-center"
               >
                 <LogOut className="h-4 w-4 mr-1" />
@@ -147,17 +145,15 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="border-t border-border my-2 pt-2">
-                {isAuthenticated ? (
+                {user ? (
                   <>
                     <div className="px-4 py-2 text-sm font-medium">
-                      {user?.name || user?.email || "User"}
+                      {user?.user_metadata?.full_name || user.email || "User"}
                     </div>
                     <Button 
                       variant="ghost"
                       className="w-full justify-start px-4 py-3 text-left"
-                      onClick={() => logout({ 
-                        logoutParams: { returnTo: window.location.origin } 
-                      })}
+                      onClick={() => signOut()}
                     >
                       <LogOut className="h-4 w-4 mr-2" />
                       Logout

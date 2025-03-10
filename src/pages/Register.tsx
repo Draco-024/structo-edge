@@ -2,10 +2,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
-import { useToast } from "@/components/ui/use-toast";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useSupabaseAuth } from '@/contexts/SupabaseAuthProvider';
+import { supabase } from '@/lib/supabase';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -15,13 +16,14 @@ const Register = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [isPhoneRegister, setIsPhoneRegister] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+  const { signInWithGoogle, user } = useSupabaseAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleEmailRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (isAuthenticated) {
+    if (user) {
       toast({
         title: "Already registered",
         description: "You are already authenticated",
@@ -29,20 +31,32 @@ const Register = () => {
       return;
     }
 
-    if (!isPhoneRegister) {
-      if (password !== confirmPassword) {
-        toast({
-          title: "Error",
-          description: "Passwords do not match",
-          variant: "destructive",
-        });
-        return;
-      }
+    if (password !== confirmPassword) {
+      toast({
+        title: "Error",
+        description: "Passwords do not match",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name,
+          }
+        }
+      });
       
-      // In a real app, you would handle registration here
+      if (error) throw error;
+      
       toast({
         title: "Registration successful",
-        description: "Welcome to StructoEdge!",
+        description: "Please check your email for verification instructions",
       });
       
       // Clear form
@@ -51,25 +65,71 @@ const Register = () => {
       setPassword('');
       setConfirmPassword('');
       setAcceptTerms(false);
-    } else {
-      // Use Auth0 for phone registration
-      loginWithRedirect({
-        authorizationParams: {
-          screen_hint: 'signup',
-          connection: 'sms',
-          phoneNumber: phoneNumber
-        }
+    } catch (error: any) {
+      toast({
+        title: "Registration failed",
+        description: error.message,
+        variant: "destructive"
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const handlePhoneRegister = () => {
-    loginWithRedirect({
-      authorizationParams: {
-        screen_hint: 'signup',
-        connection: 'sms',
-      }
-    });
+  const handleGoogleSignUp = async () => {
+    if (user) {
+      toast({
+        title: "Already logged in",
+        description: "You are already authenticated",
+      });
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      await signInWithGoogle();
+      // No need to show toast here as it will redirect
+    } catch (error: any) {
+      toast({
+        title: "Registration failed",
+        description: error.message,
+        variant: "destructive"
+      });
+      setIsLoading(false);
+    }
+  };
+
+  const handlePhoneRegister = async () => {
+    if (!acceptTerms) {
+      toast({
+        title: "Error",
+        description: "Please accept the terms of service",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        phone: phoneNumber
+      });
+      
+      if (error) throw error;
+      
+      toast({
+        title: "OTP Sent",
+        description: "Please check your phone for the verification code"
+      });
+    } catch (error: any) {
+      toast({
+        title: "SMS Verification Failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -86,6 +146,34 @@ const Register = () => {
           </div>
 
           <div className="bg-card border border-border rounded-lg p-6 md:p-8 shadow-sm">
+            {/* Social login buttons */}
+            <div className="space-y-4 mb-6">
+              <Button
+                variant="outline"
+                className="w-full flex items-center justify-center gap-2"
+                onClick={handleGoogleSignUp}
+                disabled={isLoading}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" className="w-5 h-5">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                  <path fill="none" d="M1 1h22v22H1z" />
+                </svg>
+                Sign up with Google
+              </Button>
+            </div>
+
+            <div className="relative flex items-center justify-center mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-border"></div>
+              </div>
+              <div className="relative px-4 bg-card text-sm text-muted-foreground">
+                Or continue with
+              </div>
+            </div>
+
             {/* Toggle between email and phone registration */}
             <div className="flex mb-6 bg-muted rounded-md p-1">
               <button
@@ -107,7 +195,7 @@ const Register = () => {
             </div>
 
             {!isPhoneRegister ? (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleEmailRegister} className="space-y-5">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium text-foreground block">
                     Full Name
@@ -190,8 +278,9 @@ const Register = () => {
                 <Button
                   type="submit"
                   className="w-full"
+                  disabled={isLoading}
                 >
-                  Create Account
+                  {isLoading ? "Creating Account..." : "Create Account"}
                 </Button>
               </form>
             ) : (
@@ -239,7 +328,7 @@ const Register = () => {
                   className="w-full"
                   disabled={isLoading || !acceptTerms}
                 >
-                  {isLoading ? "Loading..." : "Register with Phone"}
+                  {isLoading ? "Sending OTP..." : "Register with Phone"}
                 </Button>
               </div>
             )}
