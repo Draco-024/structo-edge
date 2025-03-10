@@ -1,11 +1,11 @@
 
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useState } from 'react';
 import { useToast } from "@/components/ui/use-toast";
-import { ShoppingCart, Lock, BookOpen, PlayCircle, FileText } from "lucide-react";
+import { ShoppingCart, Lock, BookOpen, PlayCircle, FileText, Award } from "lucide-react";
 import Quiz from '@/components/Quiz';
 
 const CourseDetail = () => {

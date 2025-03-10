@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, HelpCircle, Mail, MessageSquare, Book, PlayCircle, FileText } from "lucide-react";
+import { Search, HelpCircle, Mail, Book, PlayCircle, FileText } from "lucide-react";
 
 const Help = () => {
   const faqs = [
@@ -81,7 +81,7 @@ const Help = () => {
 
         {/* Help Tabs */}
         <Tabs defaultValue="faq" className="max-w-4xl mx-auto mb-16">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
             <TabsTrigger value="faq" className="flex items-center justify-center space-x-2 py-3">
               <HelpCircle className="h-4 w-4" />
               <span>FAQs</span>
@@ -89,10 +89,6 @@ const Help = () => {
             <TabsTrigger value="resources" className="flex items-center justify-center space-x-2 py-3">
               <Book className="h-4 w-4" />
               <span>Resources</span>
-            </TabsTrigger>
-            <TabsTrigger value="contact" className="flex items-center justify-center space-x-2 py-3">
-              <Mail className="h-4 w-4" />
-              <span>Contact Us</span>
             </TabsTrigger>
           </TabsList>
           
@@ -132,7 +128,7 @@ const Help = () => {
           </TabsContent>
           
           <TabsContent value="contact">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
               <div className="bg-muted/30 rounded-lg p-6">
                 <div className="flex items-center mb-4">
                   <Mail className="h-6 w-6 text-primary mr-2" />
@@ -141,20 +137,8 @@ const Help = () => {
                 <p className="text-muted-foreground mb-4">
                   For general inquiries and account issues, our support team is ready to help.
                 </p>
-                <p className="font-medium">support@structoedge.com</p>
+                <p className="font-medium">vishalmore9192@gmail.com</p>
                 <p className="text-sm text-muted-foreground">Response time: Within 24 hours</p>
-              </div>
-              
-              <div className="bg-muted/30 rounded-lg p-6">
-                <div className="flex items-center mb-4">
-                  <MessageSquare className="h-6 w-6 text-primary mr-2" />
-                  <h3 className="text-lg font-medium">Live Chat</h3>
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  Get immediate assistance with technical issues or course questions.
-                </p>
-                <Button className="w-full">Start Chat</Button>
-                <p className="text-sm text-muted-foreground mt-2">Available Monday-Friday, 9am-6pm ET</p>
               </div>
             </div>
           </TabsContent>
