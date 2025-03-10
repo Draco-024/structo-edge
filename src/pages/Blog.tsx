@@ -1,4 +1,3 @@
-
 import MainLayout from '@/layouts/MainLayout';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -123,7 +122,7 @@ const Blog = () => {
     {
       id: '012',
       title: 'The Role of Structural Engineers in Heritage Conservation',
-      excerpt: 'Challenges and solutions in preserving India's architectural heritage while ensuring structural safety.',
+      excerpt: "Challenges and solutions in preserving India's architectural heritage while ensuring structural safety.",
       author: 'Dr. Sneha Iyer',
       category: 'Conservation',
       date: 'November 5, 2022',
@@ -218,7 +217,6 @@ const BlogCard = ({ post }: BlogCardProps) => {
           alt={post.title} 
           className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
           onError={(e) => {
-            // Fallback image if the original fails to load
             (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80";
           }}
         />
