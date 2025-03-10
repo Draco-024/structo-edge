@@ -4,14 +4,17 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Clock, User, CalendarDays } from "lucide-react";
+import { useState } from 'react';
 
 const Blog = () => {
+  const [visiblePosts, setVisiblePosts] = useState(6);
+  
   const blogPosts = [
     {
       id: '001',
       title: 'Advances in Concrete Mix Design for Sustainable Structures',
       excerpt: 'Explore the latest innovations in concrete mix design that reduce environmental impact while maintaining structural integrity.',
-      author: 'Dr. Robert Chen',
+      author: 'Er. Vishal More',
       category: 'Materials',
       date: 'October 15, 2023',
       readTime: '8 min read',
@@ -21,7 +24,7 @@ const Blog = () => {
       id: '002',
       title: 'Structural Analysis Techniques for High-Rise Buildings',
       excerpt: 'A comprehensive overview of modern structural analysis methods used in designing resilient skyscrapers.',
-      author: 'Emily Wong, PE',
+      author: 'Dr. Rajesh Sharma',
       category: 'Analysis',
       date: 'September 28, 2023',
       readTime: '12 min read',
@@ -31,7 +34,7 @@ const Blog = () => {
       id: '003',
       title: 'Seismic Retrofitting: Lessons from Recent Earthquakes',
       excerpt: 'What recent seismic events have taught us about the effectiveness of various retrofitting strategies.',
-      author: 'Dr. Michael Barnes',
+      author: 'Prof. Sunil Jadhav',
       category: 'Seismic',
       date: 'August 10, 2023',
       readTime: '10 min read',
@@ -41,7 +44,7 @@ const Blog = () => {
       id: '004',
       title: 'Bridge Engineering: Innovations in Long-Span Designs',
       excerpt: 'Recent advancements in materials and analysis techniques that are pushing the boundaries of long-span bridge design.',
-      author: 'Jessica Taylor, PhD',
+      author: 'Er. Anand Patil',
       category: 'Bridges',
       date: 'July 22, 2023',
       readTime: '9 min read',
@@ -51,7 +54,7 @@ const Blog = () => {
       id: '005',
       title: 'Digital Twins in Structural Engineering Practice',
       excerpt: 'How digital twin technology is transforming monitoring, maintenance, and lifecycle management of critical infrastructure.',
-      author: 'Robert Lee, PE',
+      author: 'Dr. Kavita Mehta',
       category: 'Technology',
       date: 'June 15, 2023',
       readTime: '7 min read',
@@ -61,15 +64,79 @@ const Blog = () => {
       id: '006',
       title: 'Climate Adaptation in Structural Design Codes',
       excerpt: 'An analysis of how design codes are evolving to address climate change impacts on structural performance and safety.',
-      author: 'Prof. Sophia Kim',
+      author: 'Er. Vishal More',
       category: 'Codes & Standards',
       date: 'May 30, 2023',
       readTime: '11 min read',
       image: 'https://images.unsplash.com/photo-1601055903647-ddf1ee9701b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+    },
+    {
+      id: '007',
+      title: 'Foundation Design Considerations for Black Cotton Soil',
+      excerpt: 'Exploring effective foundation solutions for problematic expansive soils commonly found across central India.',
+      author: 'Er. Vishal More',
+      category: 'Geotechnical',
+      date: 'April 12, 2023',
+      readTime: '9 min read',
+      image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+    },
+    {
+      id: '008',
+      title: 'Implementing IS 456:2000 Standards in Modern Construction',
+      excerpt: 'A practical guide to applying Indian Standard code provisions for reinforced concrete design in contemporary projects.',
+      author: 'Prof. Amit Desai',
+      category: 'Codes & Standards',
+      date: 'March 5, 2023',
+      readTime: '10 min read',
+      image: 'https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+    },
+    {
+      id: '009',
+      title: 'Cost-Effective Design Practices for Rural Housing',
+      excerpt: 'Addressing the challenges of providing affordable yet resilient housing solutions in rural India.',
+      author: 'Dr. Priya Patel',
+      category: 'Housing',
+      date: 'February 18, 2023',
+      readTime: '8 min read',
+      image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+    },
+    {
+      id: '010',
+      title: 'Traditional vs Modern Construction Techniques in India',
+      excerpt: 'Comparing the durability, cost, and environmental impact of traditional building methods with modern approaches.',
+      author: 'Er. Vishal More',
+      category: 'Construction',
+      date: 'January 24, 2023',
+      readTime: '12 min read',
+      image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+    },
+    {
+      id: '011',
+      title: 'Designing for Monsoons: Drainage Systems for Buildings',
+      excerpt: 'Best practices for integrating effective water management systems in buildings across high-rainfall regions of India.',
+      author: 'Er. Rahul Kumar',
+      category: 'Water Management',
+      date: 'December 10, 2022',
+      readTime: '7 min read',
+      image: 'https://images.unsplash.com/photo-1523821741446-edb2b68bb7a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+    },
+    {
+      id: '012',
+      title: 'The Role of Structural Engineers in Heritage Conservation',
+      excerpt: 'Challenges and solutions in preserving India's architectural heritage while ensuring structural safety.',
+      author: 'Dr. Sneha Iyer',
+      category: 'Conservation',
+      date: 'November 5, 2022',
+      readTime: '9 min read',
+      image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197c77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
     }
   ];
 
-  const categories = ['All', 'Materials', 'Analysis', 'Seismic', 'Bridges', 'Technology', 'Codes & Standards'];
+  const categories = ['All', 'Materials', 'Analysis', 'Seismic', 'Bridges', 'Technology', 'Codes & Standards', 'Geotechnical', 'Housing', 'Construction', 'Water Management', 'Conservation'];
+
+  const loadMorePosts = () => {
+    setVisiblePosts(prev => Math.min(prev + 6, blogPosts.length));
+  };
 
   return (
     <MainLayout>
@@ -94,7 +161,7 @@ const Blog = () => {
           
           <TabsContent value="All" className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {blogPosts.map((post) => (
+              {blogPosts.slice(0, visiblePosts).map((post) => (
                 <BlogCard key={post.id} post={post} />
               ))}
             </div>
@@ -105,6 +172,7 @@ const Blog = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {blogPosts
                   .filter((post) => post.category === category)
+                  .slice(0, visiblePosts)
                   .map((post) => (
                     <BlogCard key={post.id} post={post} />
                   ))}
@@ -113,14 +181,16 @@ const Blog = () => {
           ))}
         </Tabs>
 
-        <div className="mt-12 flex justify-center">
-          <Link 
-            to="#" 
-            className="px-6 py-3 rounded-md bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
-          >
-            Load More Articles
-          </Link>
-        </div>
+        {visiblePosts < blogPosts.length && (
+          <div className="mt-12 flex justify-center">
+            <button 
+              onClick={loadMorePosts}
+              className="px-6 py-3 rounded-md bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
+            >
+              Load More Articles
+            </button>
+          </div>
+        )}
       </div>
     </MainLayout>
   );
@@ -141,12 +211,16 @@ interface BlogCardProps {
 
 const BlogCard = ({ post }: BlogCardProps) => {
   return (
-    <Card className="overflow-hidden hover:shadow-md transition-shadow">
+    <Card className="overflow-hidden hover:shadow-md transition-shadow h-full flex flex-col">
       <div className="aspect-video w-full overflow-hidden">
         <img 
           src={post.image} 
           alt={post.title} 
           className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
+          onError={(e) => {
+            // Fallback image if the original fails to load
+            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80";
+          }}
         />
       </div>
       <CardHeader className="pb-2">
@@ -166,7 +240,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
           </Link>
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-grow">
         <CardDescription className="line-clamp-3 mb-4">
           {post.excerpt}
         </CardDescription>

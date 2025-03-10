@@ -71,10 +71,10 @@ export const SupabaseAuthProvider = ({ children }: SupabaseAuthProviderProps) =>
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/`,
+          redirectTo: window.location.origin,
+          // Remove query parameters that might be causing the 403 error
           queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
+            prompt: 'select_account'
           }
         },
       });

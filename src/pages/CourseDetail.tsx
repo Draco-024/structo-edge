@@ -1,3 +1,4 @@
+
 import { useParams, Link } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -135,28 +136,44 @@ const CourseDetail = () => {
     ],
   };
 
-  // Updated YouTube playlist videos from the provided links
+  // Updated YouTube videos with the requested links
   const videoURLs = [
-    "https://www.youtube.com/embed/XJbVuq_2MCY?si=9DwJXoL3KZdqzuO9",
-    "https://www.youtube.com/embed/5C0BZp_HZP8?si=8QhkE-2oo5qoaXK0",
-    "https://www.youtube.com/embed/eld9F-KTZY0?si=iUxijKUl6x5iV0hl",
-    "https://www.youtube.com/embed/-gAAcg6mUBI?si=oGUYFtb9yw-fzWDT",
-    "https://www.youtube.com/embed/-Tp-jh1f7Wc?si=kCk7Z_Ii_-MzNkN6",
-    "https://www.youtube.com/embed/k40vTnrX_bc?si=h9uQzZdNi9D6XQkJ",
-    "https://www.youtube.com/embed/Vv_lJwWXlKA?si=9DwJXoL3KZdqzuO9",
-    "https://www.youtube.com/embed/deUHMZZ2pIo?si=8QhkE-2oo5qoaXK0",
-    "https://www.youtube.com/embed/x38Sqqj9ASw?si=iUxijKUl6x5iV0hl",
-    "https://www.youtube.com/embed/evESmg6SSNM?si=oGUYFtb9yw-fzWDT",
-    "https://www.youtube.com/embed/_xzYEZxvyIk?si=kCk7Z_Ii_-MzNkN6",
-    "https://www.youtube.com/embed/JpMTDIRZERU?si=h9uQzZdNi9D6XQkJ",
-    "https://www.youtube.com/embed/BpZpINWZ23I?si=9DwJXoL3KZdqzuO9",
-    "https://www.youtube.com/embed/U6kWb83Q2ug?si=8QhkE-2oo5qoaXK0",
-    "https://www.youtube.com/embed/aFlVIGWkDAM?si=iUxijKUl6x5iV0hl",
-    "https://www.youtube.com/embed/r-zvK9sQ3YE?si=oGUYFtb9yw-fzWDT",
-    "https://www.youtube.com/embed/0NQAsIyOch8?si=kCk7Z_Ii_-MzNkN6",
-    "https://www.youtube.com/embed/M4w6l6puPzo?si=h9uQzZdNi9D6XQkJ",
-    "https://www.youtube.com/embed/wF73q3K9JTg?si=9DwJXoL3KZdqzuO9",
-    "https://www.youtube.com/embed/tApdZ75W3pE?si=8QhkE-2oo5qoaXK0"
+    "https://www.youtube.com/embed/cmZ0ejfv5D0",
+    "https://www.youtube.com/embed/7Q_h7VQH0cQ",
+    "https://www.youtube.com/embed/twb_fAVMDFI",
+    "https://www.youtube.com/embed/kG-T7l27cTU",
+    "https://www.youtube.com/embed/GxwUxGQTJkM",
+    "https://www.youtube.com/embed/KBysHbNZY90",
+    "https://www.youtube.com/embed/rn3Nf6VTVPQ",
+    "https://www.youtube.com/embed/bj9ITl4TPXE",
+    "https://www.youtube.com/embed/Z9CWHZfSHyI",
+    "https://www.youtube.com/embed/9_J3NfESEbs",
+    "https://www.youtube.com/embed/Q6d0PaPB8ww",
+    "https://www.youtube.com/embed/rOjb8QvuQ2s",
+    "https://www.youtube.com/embed/okVMuUua5AE",
+    "https://www.youtube.com/embed/ya5V4g5XYb4",
+    "https://www.youtube.com/embed/tgc4zxv92co",
+    "https://www.youtube.com/embed/2BkrbyQ8ZrE",
+    "https://www.youtube.com/embed/5iRmnDgsTiw",
+    "https://www.youtube.com/embed/7mXAevSFNrc",
+    "https://www.youtube.com/embed/SKf_7AMI2_Y",
+    "https://www.youtube.com/embed/mxv0VVbzqho",
+    "https://www.youtube.com/embed/Gla5fRkvX9M",
+    "https://www.youtube.com/embed/RDkbV2RqBcQ",
+    "https://www.youtube.com/embed/tazaZUG8nfI",
+    "https://www.youtube.com/embed/fkqSDviOnXU",
+    "https://www.youtube.com/embed/N-dKC-_Shm8",
+    "https://www.youtube.com/embed/ArPKIdNW7YA",
+    "https://www.youtube.com/embed/PukKHYZZWOo",
+    "https://www.youtube.com/embed/5APEZT_bCDQ",
+    "https://www.youtube.com/embed/y2Ldm4Vomus",
+    "https://www.youtube.com/embed/T5nKhFuc7b0",
+    "https://www.youtube.com/embed/XoW_dUtzpKQ",
+    "https://www.youtube.com/embed/R0t5TuCSE3M",
+    "https://www.youtube.com/embed/wcx8cF23ihk",
+    "https://www.youtube.com/embed/gQ-ZraqB_AQ",
+    "https://www.youtube.com/embed/GVOjnvlL65A",
+    "https://www.youtube.com/embed/br8KXy7fZB4"
   ];
 
   const handleAddToCart = () => {
@@ -215,7 +232,11 @@ const CourseDetail = () => {
       description: `You scored ${score} out of ${total}. Certificate available in your profile.`,
     });
     setShowQuiz(false);
+    // Add link to certification
+    navigate('/certification');
   };
+
+  const navigate = useNavigate();
 
   return (
     <MainLayout>
@@ -372,6 +393,12 @@ const CourseDetail = () => {
                         <span>Create and interpret free body diagrams</span>
                       </li>
                     </ul>
+                    
+                    <div className="mt-6 pt-4 border-t border-border">
+                      <Link to="/certification" className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors">
+                        <Award className="mr-2 h-5 w-5" /> Get Certification
+                      </Link>
+                    </div>
                   </div>
                 </TabsContent>
                 

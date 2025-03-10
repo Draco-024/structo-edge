@@ -1,195 +1,162 @@
 
 import MainLayout from '@/layouts/MainLayout';
-import { PhoneCall, Mail, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Separator } from "@/components/ui/separator";
+import { Mail, Phone, MapPin, Clock, Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
 
 const About = () => {
-  const team = [
-    {
-      name: "Er. Vishal More",
-      role: "Founder & CEO",
-      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      bio: "Structural engineering expert with over 15 years of experience in education technology and professional practice."
-    },
-    {
-      name: "Er. Vishal More",
-      role: "Chief Technology Officer",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      bio: "Engineering leader with experience at major tech companies and edtech startups focused on accessible learning."
-    },
-    {
-      name: "Er. Vishal More",
-      role: "Head of Education",
-      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      bio: "Ph.D. in Structural Engineering with a passion for creating engaging learning experiences for all students."
-    }
-  ];
-
-  const values = [
-    {
-      title: "Intentional Design",
-      description: "We believe learning environments should be designed with purpose, removing distractions and focusing on what matters.",
-      icon: (
-        <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10" />
-          <circle cx="12" cy="12" r="6" />
-          <circle cx="12" cy="12" r="2" />
-        </svg>
-      )
-    },
-    {
-      title: "Accessibility",
-      description: "Education should be accessible to everyone, regardless of background, ability, or circumstances.",
-      icon: (
-        <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-          <path d="M9 2h6v4H9z" />
-          <path d="m9 14 2 2 4-4" />
-        </svg>
-      )
-    },
-    {
-      title: "Community Growth",
-      description: "Learning flourishes in community. We foster environments where students can collaborate, share, and grow together.",
-      icon: (
-        <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 1 0 7.75" />
-          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
-      )
-    }
-  ];
-
   return (
     <MainLayout>
       <div className="container mx-auto px-4 md:px-6 pt-24 pb-16">
-        {/* Hero Section */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-primary mb-4">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-primary mb-8">
             About StructoEdge
           </h1>
-          <p className="text-lg text-muted-foreground">
-            We're reimagining structural engineering education through the lens of intentional design and meaningful learning experiences.
-          </p>
-        </div>
-
-        {/* Trimurti Infrastructure Section */}
-        <div className="max-w-4xl mx-auto mb-20">
-          <div className="bg-muted/30 border border-border rounded-lg p-8 md:p-10">
-            <h2 className="text-2xl md:text-3xl font-medium tracking-tight text-primary mb-6">
-              Trimurti Infrastructure – Engineering Your Dreams into Reality!
-            </h2>
+          
+          <div className="prose max-w-none mb-10">
+            <p className="text-muted-foreground text-lg mb-6">
+              At StructoEdge, our mission is to make high-quality education in structural engineering accessible to all. Founded by industry experts with decades of experience, we've created a comprehensive platform that bridges the gap between theoretical knowledge and practical application.
+            </p>
             
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-medium mb-3">📌 Services:</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <span className="text-accent mr-2">✔️</span>
-                    <span>RCC Structure Design (STAAD.Pro, ETABS, AutoCAD, Revit)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-accent mr-2">✔️</span>
-                    <span>Earthquake-Resistant Design & Analysis</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-accent mr-2">✔️</span>
-                    <span>Project Consultation & Site Supervision</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-accent mr-2">✔️</span>
-                    <span>Quantity Estimation (MT/Kg)</span>
-                  </li>
-                </ul>
-              </div>
+            <p className="text-muted-foreground mb-6">
+              We believe that learning should be continuous, engaging, and relevant to the current industry demands. That's why our courses are regularly updated to reflect the latest advancements, standards, and best practices in structural engineering.
+            </p>
+            
+            <div className="py-10 border-y border-border mb-10">
+              <h2 className="text-2xl font-medium mb-6 text-center">Trimurti Infrastructure – Engineering Your Dreams into Reality!</h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-                <a href="tel:+918788017458" className="flex items-center p-4 bg-background rounded-lg border border-border hover:shadow-md transition-all">
-                  <PhoneCall className="h-5 w-5 text-accent mr-2" />
-                  <span>+91 8788017458</span>
-                </a>
-                <a href="mailto:vishalmore9192@gmail.com" className="flex items-center p-4 bg-background rounded-lg border border-border hover:shadow-md transition-all">
-                  <Mail className="h-5 w-5 text-accent mr-2" />
-                  <span>vishalmore9192@gmail.com</span>
-                </a>
-                <a href="https://wa.me/918788017458" target="_blank" rel="noopener noreferrer" className="flex items-center p-4 bg-background rounded-lg border border-border hover:shadow-md transition-all">
-                  <MessageSquare className="h-5 w-5 text-accent mr-2" />
-                  <span>WhatsApp: 8788017458</span>
-                </a>
-              </div>
-              
-              <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary">
-                  🔹 Innovative
-                </span>
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary">
-                  🔹 Safe
-                </span>
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary">
-                  🔹 Cost-Effective
-                </span>
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary/10 text-primary">
-                  🔹 Reliable
-                </span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+                <div>
+                  <h3 className="text-xl font-medium mb-4 flex items-center">
+                    <span className="text-primary mr-2">📌</span> Services
+                  </h3>
+                  <ul className="space-y-3 text-muted-foreground">
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">✔️</span>
+                      <span>RCC Structure Design (STAAD.Pro, ETABS, AutoCAD, Revit)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">✔️</span>
+                      <span>Earthquake-Resistant Design & Analysis</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">✔️</span>
+                      <span>Project Consultation & Site Supervision</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2">✔️</span>
+                      <span>Quantity Estimation (MT/Kg)</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="mb-4">
+                    <h3 className="text-xl font-medium mb-4 flex items-center">
+                      <span className="text-primary mr-2">📞</span> Contact Us
+                    </h3>
+                    <div className="space-y-3 text-muted-foreground">
+                      <div className="flex items-center">
+                        <Phone className="h-5 w-5 mr-3 text-primary" />
+                        <a href="tel:+918788017458" className="hover:text-primary transition-colors">+91 8788017458</a>
+                      </div>
+                      <div className="flex items-center">
+                        <Mail className="h-5 w-5 mr-3 text-primary" />
+                        <a href="mailto:vishalmore9192@gmail.com" className="hover:text-primary transition-colors">vishalmore9192@gmail.com</a>
+                      </div>
+                      <div className="flex items-center">
+                        <Phone className="h-5 w-5 mr-3 text-primary" />
+                        <span>WhatsApp: 8788017458</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-border">
+                    <div className="flex items-center text-primary">
+                      <span className="text-lg">🔹</span>
+                      <span className="mx-2">Innovative</span>
+                      <span className="text-lg">|</span>
+                      <span className="mx-2">Safe</span>
+                      <span className="text-lg">|</span>
+                      <span className="mx-2">Cost-Effective</span>
+                      <span className="text-lg">|</span>
+                      <span className="mx-2">Reliable</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Mission Section */}
-        <div className="max-w-4xl mx-auto mb-20">
-          <div className="bg-muted/30 border border-border rounded-lg p-8 md:p-10">
-            <h2 className="text-2xl md:text-3xl font-medium tracking-tight text-primary mb-6">
-              Our Mission
-            </h2>
-            <p className="text-lg leading-relaxed mb-6">
-              At StructoEdge, we believe that learning experiences in structural engineering should be designed with the same level of care and attention to detail as the structures we build. We're on a mission to create educational content that combines elegance, simplicity, and functionality to help engineers achieve their goals.
-            </p>
-            <p className="text-lg leading-relaxed">
-              Founded in 2023 by Er. Vishal More, we bring together experts from structural engineering, design, and technology to create courses that don't just teach skills, but inspire creativity and foster deep understanding of engineering principles.
-            </p>
-          </div>
-        </div>
-
-        {/* Values Section */}
-        <div className="mb-20">
-          <h2 className="text-2xl md:text-3xl font-medium tracking-tight text-primary mb-10 text-center">
-            Our Values
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {values.map((value, index) => (
-              <div key={index} className="bg-card border border-border rounded-lg p-6 transition-all duration-300 hover:shadow-md">
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-4 text-accent">
-                  {value.icon}
-                </div>
-                <h3 className="text-xl font-medium text-primary mb-2">{value.title}</h3>
-                <p className="text-muted-foreground">{value.description}</p>
+            
+            <h2 className="text-2xl font-medium mb-6">Our Approach to Learning</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              <div className="p-6 border border-border rounded-lg">
+                <h3 className="text-xl font-medium mb-3">Expert-Led Content</h3>
+                <p className="text-muted-foreground">All our courses are designed and taught by Er. Vishal More, a seasoned professional with extensive industry experience who brings real-world projects into the classroom.</p>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Team Section */}
-        <div>
-          <h2 className="text-2xl md:text-3xl font-medium tracking-tight text-primary mb-10 text-center">
-            Meet Our Team
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="bg-card border border-border rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full aspect-[4/3] object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-medium text-primary">{member.name}</h3>
-                  <p className="text-accent mb-2">{member.role}</p>
-                  <p className="text-muted-foreground">{member.bio}</p>
-                </div>
+              
+              <div className="p-6 border border-border rounded-lg">
+                <h3 className="text-xl font-medium mb-3">Interactive Learning</h3>
+                <p className="text-muted-foreground">We believe in learning by doing. Our courses include hands-on projects, quizzes, and assignments that reinforce concepts and build practical skills.</p>
               </div>
-            ))}
+              
+              <div className="p-6 border border-border rounded-lg">
+                <h3 className="text-xl font-medium mb-3">Continuous Support</h3>
+                <p className="text-muted-foreground">Learning doesn't stop when the video ends. Our community forums and dedicated support team ensure you get help whenever you need it.</p>
+              </div>
+            </div>
+            
+            <h2 className="text-2xl font-medium mb-6">Our Vision</h2>
+            
+            <p className="text-muted-foreground mb-10">
+              We aim to create a global community of skilled structural engineers equipped to tackle the challenges of modern construction. By providing accessible, high-quality education, we're working towards safer, more innovative, and sustainable built environments worldwide.
+            </p>
+            
+            <div className="bg-muted/30 p-6 rounded-lg border border-border mb-10">
+              <h2 className="text-2xl font-medium mb-4">Join Our Community</h2>
+              <p className="text-muted-foreground mb-4">
+                Become part of our growing community of structural engineering students, professionals, and enthusiasts. Share knowledge, ask questions, and connect with like-minded individuals from around the world.
+              </p>
+              <Link 
+                to="/community" 
+                className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+              >
+                Join Now
+              </Link>
+            </div>
+            
+            <h2 className="text-2xl font-medium mb-6">Connect With Us</h2>
+            
+            <div className="flex space-x-4">
+              <a 
+                href="#" 
+                className="p-3 border border-border rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a 
+                href="#" 
+                className="p-3 border border-border rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a 
+                href="#" 
+                className="p-3 border border-border rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a 
+                href="#" 
+                className="p-3 border border-border rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
