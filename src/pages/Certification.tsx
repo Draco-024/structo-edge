@@ -1,22 +1,31 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MainLayout from '@/layouts/MainLayout';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Award, Download, Edit2, FileDown } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Award, Download, Edit2, FileDown, Lock, ShoppingCart } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Certification = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isEditing, setIsEditing] = useState(true);
   const [certificateGenerated, setCertificateGenerated] = useState(false);
+  const [purchasedCourses, setPurchasedCourses] = useState<string[]>([]);
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Simulate fetching purchased courses
+  useEffect(() => {
+    // In a real app, this would be an API call to get the user's purchased courses
+    // For now, let's assume the user has purchased one course
+    setPurchasedCourses(['Fundamentals of Structural Analysis']);
+  }, []);
 
   const handleSave = () => {
     if (!name || !email) {
@@ -50,6 +59,27 @@ const Certification = () => {
       navigate('/certification/download-pdf', { state: { name, email, course: 'Fundamentals of Structural Analysis' } });
     }, 1000);
   };
+
+  const allCourses = [
+    {
+      id: '001',
+      title: 'Fundamentals of Structural Analysis',
+      completedDate: '15 March 2023',
+      isPurchased: purchasedCourses.includes('Fundamentals of Structural Analysis')
+    },
+    {
+      id: '002',
+      title: 'Advanced Concrete Design',
+      completedDate: '10 June 2023',
+      isPurchased: purchasedCourses.includes('Advanced Concrete Design')
+    },
+    {
+      id: '003',
+      title: 'Seismic Design and Analysis',
+      completedDate: 'Not completed',
+      isPurchased: false
+    }
+  ];
 
   return (
     <MainLayout>
@@ -124,7 +154,7 @@ const Certification = () => {
             </CardFooter>
           </Card>
 
-          {certificateGenerated && (
+          {certificateGenerated && purchasedCourses.includes('Fundamentals of Structural Analysis') && (
             <div className="space-y-8">
               <div className="relative">
                 <div className="border-8 border-double border-primary/20 p-8 bg-white rounded-lg shadow-lg">
@@ -168,47 +198,63 @@ const Certification = () => {
           <Separator className="my-8" />
 
           <div className="space-y-6">
-            <h2 className="text-2xl font-medium text-primary mb-4">Your Completed Courses</h2>
+            <h2 className="text-2xl font-medium text-primary mb-4">Your Courses</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">Fundamentals of Structural Analysis</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">Completed on: 15 March 2023</p>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" className="w-full" onClick={() => {
-                    setCertificateGenerated(true);
-                    setIsEditing(false);
-                    setName(name || "Your Name");
-                    setEmail(email || "your.email@example.com");
-                  }}>
-                    <Award className="mr-2 h-4 w-4" />
-                    View Certificate
-                  </Button>
-                </CardFooter>
-              </Card>
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">Advanced Concrete Design</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">Completed on: 10 June 2023</p>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" className="w-full" onClick={() => {
-                    setCertificateGenerated(true);
-                    setIsEditing(false);
-                    setName(name || "Your Name");
-                    setEmail(email || "your.email@example.com");
-                  }}>
-                    <Award className="mr-2 h-4 w-4" />
-                    View Certificate
-                  </Button>
-                </CardFooter>
-              </Card>
+              {allCourses.map((course) => (
+                <Card key={course.id} className="group transition-all duration-200 hover:shadow-md">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg flex items-center">
+                      {course.title}
+                      {!course.isPurchased && (
+                        <Lock className="ml-2 h-4 w-4 text-muted-foreground" />
+                      )}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      {course.completedDate !== 'Not completed' 
+                        ? `Completed on: ${course.completedDate}` 
+                        : 'Status: Not completed'}
+                    </p>
+                  </CardContent>
+                  <CardFooter>
+                    {course.isPurchased ? (
+                      <Button 
+                        variant="outline" 
+                        className="w-full group-hover:bg-primary group-hover:text-white transition-colors"
+                        onClick={() => {
+                          setCertificateGenerated(true);
+                          setIsEditing(false);
+                          setName(name || "Your Name");
+                          setEmail(email || "your.email@example.com");
+                        }}
+                      >
+                        <Award className="mr-2 h-4 w-4" />
+                        View Certificate
+                      </Button>
+                    ) : (
+                      <Link to="/pricing" className="w-full">
+                        <Button variant="outline" className="w-full">
+                          <ShoppingCart className="mr-2 h-4 w-4" />
+                          Purchase Course
+                        </Button>
+                      </Link>
+                    )}
+                  </CardFooter>
+                </Card>
+              ))}
             </div>
+            {purchasedCourses.length === 0 && (
+              <Alert className="mt-4">
+                <AlertTitle className="flex items-center">
+                  <Lock className="mr-2 h-4 w-4" />
+                  Certificates Locked
+                </AlertTitle>
+                <AlertDescription>
+                  Certificates are only available for purchased courses. Visit our <Link to="/pricing" className="text-primary hover:underline">pricing page</Link> to purchase courses and unlock certificates.
+                </AlertDescription>
+              </Alert>
+            )}
           </div>
         </div>
       </div>

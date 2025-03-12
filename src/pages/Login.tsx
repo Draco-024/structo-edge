@@ -1,12 +1,13 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSupabaseAuth } from '@/contexts/SupabaseAuthProvider';
 import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
 
 // Fix for TypeScript error
 declare global {
@@ -24,6 +25,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { signInWithGoogle, user } = useSupabaseAuth();
+  const navigate = useNavigate();
 
   const handleEmailPasswordLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,13 +39,35 @@ const Login = () => {
     }
 
     setIsLoading(true);
+    
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
+      // First try RapidAPI login
+      const rapidApiLoginResponse = await fetch('https://login-signup.p.rapidapi.com/public/v1/login.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'x-rapidapi-host': 'login-signup.p.rapidapi.com',
+          'x-rapidapi-key': '469d65be43mshd338ce4bf882d0ap1b6664jsneb8014d73e4a',
+        },
+        body: new URLSearchParams({
+          'api_key': '394e9338b73a9f061b1968ceaa050a',
+          'email': email,
+          'password': password
+        })
       });
       
-      if (error) throw error;
+      const data = await rapidApiLoginResponse.json();
+      console.log('RapidAPI login response:', data);
+      
+      // If RapidAPI login fails, fallback to Supabase login
+      if (!data.success) {
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+        
+        if (error) throw error;
+      }
       
       toast({
         title: "Login successful",
@@ -53,6 +77,10 @@ const Login = () => {
       // Clear form
       setEmail('');
       setPassword('');
+      
+      // Navigate to home page
+      navigate('/');
+      
     } catch (error: any) {
       toast({
         title: "Login failed",

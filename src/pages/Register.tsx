@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,7 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { signInWithGoogle, user } = useSupabaseAuth();
+  const navigate = useNavigate();
 
   const handleEmailRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,17 +43,39 @@ const Register = () => {
 
     setIsLoading(true);
     try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: name,
-          }
-        }
+      // First try RapidAPI signup
+      const rapidApiSignupResponse = await fetch('https://login-signup.p.rapidapi.com/public/v1/signup.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'x-rapidapi-host': 'login-signup.p.rapidapi.com',
+          'x-rapidapi-key': '469d65be43mshd338ce4bf882d0ap1b6664jsneb8014d73e4a',
+        },
+        body: new URLSearchParams({
+          'api_key': '394e9338b73a9f061b1968ceaa050a',
+          'name': name,
+          'email': email,
+          'password': password
+        })
       });
       
-      if (error) throw error;
+      const data = await rapidApiSignupResponse.json();
+      console.log('RapidAPI signup response:', data);
+      
+      // If RapidAPI signup fails, fallback to Supabase signup
+      if (!data.success) {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              full_name: name,
+            }
+          }
+        });
+        
+        if (error) throw error;
+      }
       
       toast({
         title: "Registration successful",
@@ -65,6 +88,10 @@ const Register = () => {
       setPassword('');
       setConfirmPassword('');
       setAcceptTerms(false);
+      
+      // Navigate to login page
+      navigate('/login');
+      
     } catch (error: any) {
       toast({
         title: "Registration failed",

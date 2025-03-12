@@ -26,6 +26,7 @@ import Payment from "./pages/Payment";
 import Certification from "./pages/Certification";
 import QuizPage from "./pages/QuizPage";
 import CertificateDownload from "./pages/CertificateDownload";
+import Contact from "./pages/Contact";
 import { SupabaseAuthProvider } from "./contexts/SupabaseAuthProvider";
 
 const queryClient = new QueryClient();
@@ -59,6 +60,7 @@ const App = () => (
             <Route path="/certification" element={<Certification />} />
             <Route path="/certification/download-pdf" element={<CertificateDownload />} />
             <Route path="/quiz/:quizId" element={<QuizPage />} />
+            <Route path="/contact" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

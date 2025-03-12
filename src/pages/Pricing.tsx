@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Phone } from "lucide-react";
 import { Link } from 'react-router-dom';
+import { useToast } from "@/hooks/use-toast";
 
 const Pricing = () => {
+  const { toast } = useToast();
+  
   const pricingPlans = [
     {
       name: "Basic",
@@ -55,7 +58,7 @@ const Pricing = () => {
       ],
       recommended: false,
       btnText: "Contact Sales",
-      isContact: true
+      link: "/contact"
     }
   ];
 
@@ -75,7 +78,7 @@ const Pricing = () => {
           {pricingPlans.map((plan, index) => (
             <Card 
               key={index} 
-              className={`relative flex flex-col ${plan.recommended ? 'border-primary shadow-lg' : 'border-border'}`}
+              className={`relative flex flex-col transition-all duration-200 hover:shadow-lg ${plan.recommended ? 'border-primary shadow-lg' : 'border-border hover:border-primary/50'}`}
             >
               {plan.recommended && (
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -103,20 +106,20 @@ const Pricing = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                {plan.isContact ? (
-                  <a href="tel:8788017458" className="w-full">
+                {plan.name === "Enterprise" ? (
+                  <Link to={plan.link} className="w-full">
                     <Button 
-                      className={`w-full flex items-center ${plan.recommended ? 'bg-primary hover:bg-primary/90' : ''}`}
-                      variant={plan.recommended ? 'default' : 'outline'}
+                      className="w-full flex items-center hover:bg-primary/90 transition-colors"
+                      variant="outline"
                     >
                       <Phone className="mr-2 h-4 w-4" />
-                      {plan.btnText} (878-801-7458)
+                      {plan.btnText}
                     </Button>
-                  </a>
+                  </Link>
                 ) : (
                   <Link to={plan.link} className="w-full">
                     <Button 
-                      className={`w-full ${plan.recommended ? 'bg-primary hover:bg-primary/90' : ''}`}
+                      className={`w-full transition-colors ${plan.recommended ? 'bg-primary hover:bg-primary/90' : 'hover:bg-primary hover:text-white'}`}
                       variant={plan.recommended ? 'default' : 'outline'}
                     >
                       {plan.btnText}
