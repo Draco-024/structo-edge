@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
@@ -35,31 +34,12 @@ const Login = () => {
     setIsLoading(true);
     
     try {
-      // First try RapidAPI email authentication
-      const emailAuthResponse = await fetch('https://email-authentication-system.p.rapidapi.com/', {
-        method: 'GET',
-        headers: {
-          'x-rapidapi-host': 'email-authentication-system.p.rapidapi.com',
-          'x-rapidapi-key': '469d65be43mshd338ce4bf882d0ap1b6664jsneb8014d73e4a'
-        },
-        params: {
-          recipient: email,
-          app: 'StructoEdge'
-        }
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
       });
       
-      const data = await emailAuthResponse.json();
-      console.log('RapidAPI email auth response:', data);
-      
-      // If RapidAPI auth fails, fallback to Supabase
-      if (!data.success) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password
-        });
-        
-        if (error) throw error;
-      }
+      if (error) throw error;
       
       toast({
         title: "Login successful",
@@ -145,7 +125,7 @@ const Login = () => {
             <div className="space-y-6">
               <Button
                 variant="outline"
-                className="w-full flex items-center justify-center gap-3 h-12 text-base transition-all duration-300 hover:scale-[1.02]"
+                className="w-full flex items-center justify-center gap-3 h-12 text-base transition-all duration-300 hover:scale-[1.02] rounded-xl"
                 onClick={handleGoogleLogin}
                 disabled={isLoading}
               >
@@ -201,7 +181,7 @@ const Login = () => {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           required
-                          className="pl-10 h-12"
+                          className="pl-10 h-12 rounded-xl"
                           placeholder="you@example.com"
                         />
                       </div>
@@ -224,7 +204,7 @@ const Login = () => {
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           required
-                          className="pl-10 h-12"
+                          className="pl-10 h-12 rounded-xl"
                           placeholder="••••••••"
                         />
                       </div>
@@ -237,7 +217,7 @@ const Login = () => {
                       type="checkbox"
                       checked={rememberMe}
                       onChange={(e) => setRememberMe(e.target.checked)}
-                      className="h-4 w-4 text-accent focus:ring-accent border-border rounded"
+                      className="h-4 w-4 text-accent focus:ring-accent border-border rounded-md"
                     />
                     <label htmlFor="remember-me" className="ml-2 block text-sm text-muted-foreground">
                       Remember me
@@ -246,7 +226,7 @@ const Login = () => {
 
                   <Button 
                     type="submit" 
-                    className="w-full h-12 text-base transition-all duration-300 hover:scale-[1.02]"
+                    className="w-full h-12 text-base transition-all duration-300 hover:scale-[1.02] rounded-xl"
                     disabled={isLoading}
                   >
                     <LogIn className="mr-2 h-5 w-5" />
@@ -267,7 +247,7 @@ const Login = () => {
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         required
-                        className="pl-10 h-12"
+                        className="pl-10 h-12 rounded-xl"
                         placeholder="+91 9876543210"
                       />
                     </div>
@@ -278,7 +258,7 @@ const Login = () => {
 
                   <Button 
                     onClick={handleSMSLogin} 
-                    className="w-full h-12 text-base transition-all duration-300 hover:scale-[1.02]"
+                    className="w-full h-12 text-base transition-all duration-300 hover:scale-[1.02] rounded-xl"
                     disabled={isLoading}
                   >
                     {isLoading ? "Sending OTP..." : "Send OTP"}
